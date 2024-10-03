@@ -3,14 +3,14 @@
 require_relative "lib/jp_quest/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "jp-quest"
+  spec.name = "jp_quest"
   spec.version = JpQuest::VERSION
   spec.authors = ["milkeclair"]
   spec.email = ["milkeclair.noreply@gmail.com"]
 
   spec.summary = "translate to japanese for ftbquest"
   spec.description = "ftbquestを日本語化する"
-  spec.homepage = "https://github.com/milkeclair/jp-quest"
+  spec.homepage = "https://github.com/milkeclair/jp_quest"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.0.0"
 
