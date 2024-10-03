@@ -8,14 +8,14 @@ module JpQuest
       File.open(file_path, "r").each_with_index do |line, index|
         stripped_line = line.strip
 
-        if oneline_description?(stripped_line)
-          descs << build_oneline_description(stripped_line, index)
-        elsif start_of_description?(stripped_line)
-          start_line, desc_content = handle_start_of_description(line, index)
-        elsif end_of_description?(stripped_line, start_line)
-          descs << build_multiline_description(desc_content, start_line, index, stripped_line)
+        if oneline?(stripped_line)
+          descs << build_oneline(stripped_line, index)
+        elsif start_line?(stripped_line)
+          start_line, desc_content = handle_start_line(line, index)
+        elsif end_line?(stripped_line, start_line)
+          descs << build_multiline(desc_content, start_line, index, stripped_line)
           start_line = nil
-        elsif middle_of_description?(stripped_line, start_line)
+        elsif middle_line?(stripped_line, start_line)
           desc_content << stripped_line
         end
       end
@@ -25,21 +25,29 @@ module JpQuest
 
     private
 
-    def end_of_description?(line, start_line)
+    def oneline?(line)
+      oneline_description?(line)
+    end
+
+    def start_line?(line)
+      start_of?(line, key: :description)
+    end
+
+    def end_line?(line, start_line)
       line.strip.end_with?("]") && start_line
     end
 
-    def middle_of_description?(line, start_line)
+    def middle_line?(line, start_line)
       line.strip != "]" && start_line
     end
 
-    def handle_start_of_description(line, index)
+    def handle_start_line(line, index)
       start_line = index + 1
       desc_content = [extract_oneline(line, is_desc: true)]
       [start_line, desc_content]
     end
 
-    def build_oneline_description(line, index)
+    def build_oneline(line, index)
       {
         description: extract_oneline(line, is_desc: true),
         start_line: index + 1,
@@ -47,17 +55,17 @@ module JpQuest
       }
     end
 
-    def build_multiline_description(content, start_line, index, line)
+    def build_multiline(content, start_line, index, line)
       content << extract_oneline(line, is_desc: true)
       {
-        description: content.join("\n"),
+        description: delete_empty_lines(content).join("\n"),
         start_line: start_line,
         end_line: index + 1
       }
     end
 
-    def start_of_description?(line)
-      start_of?(line, key: :description)
+    def delete_empty_lines(content)
+      content.reject { |c| c.strip.empty? }
     end
   end
 end
