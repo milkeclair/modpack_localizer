@@ -32,16 +32,14 @@ module JpQuest
     private
 
     def extract_oneline(line, is_desc: false)
-      if is_desc
-        if oneline_description?(line)
-          line[DESC_START_LENGTH..DESC_END_LENGTH].strip
-        elsif start_of?(line, key: :description)
-          line.strip.split("[", 2)[1]
-        else
-          line.strip.split("]", 2)[0]
-        end
+      return line.strip.split(":", 2)[1] unless is_desc
+
+      if oneline_description?(line)
+        line[DESC_START_LENGTH..DESC_END_LENGTH].strip
+      elsif start_of?(line, key: :description)
+        line.strip.split("[", 2)[1]
       else
-        line.strip.split(":", 2)[1]
+        line.strip.split("]", 2)[0]
       end
     end
 
@@ -58,14 +56,6 @@ module JpQuest
       when :description
         line.strip.start_with?("description: [")
       end
-    end
-
-    def end_of_description?(line, start_line)
-      line.strip.end_with?("]") && start_line
-    end
-
-    def middle_of_description?(line, start_line)
-      line.strip != "]" && start_line
     end
   end
 end
