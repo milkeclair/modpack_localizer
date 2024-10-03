@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require "bundler/setup"
-Bundler.require
 require_relative "lib/jp_quest"
 
-translator = JpTranslatorFromGpt::Translator.new(output_logs: false)
-translator.translate_to_jp("Hello, world!")
+performer = JpQuest::Performer.new(output_logs: false)
+performer.perform(".snbt")
