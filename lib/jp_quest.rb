@@ -6,7 +6,7 @@ require_relative "jp_quest/reader"
 
 module JpQuest
   class Performer
-    def initialize(output_logs: true, except_words: [], exchange_language: "")
+    def initialize(output_logs: true, except_words: [], exchange_language: "japanese")
       @translator = JpTranslatorFromGpt::Translator.new(
         output_logs: output_logs,
         except_words: except_words,
@@ -21,8 +21,10 @@ module JpQuest
         puts f[:description]
         puts "start_line: #{f[:start_line]}, end_line: #{f[:end_line]}"
         puts "----------------"
+        # translated_text = @translator.translate(f[:description])
+        # p translated_text
+        # puts "----------------"
       end
-      # @translator.translate(file)
     end
   end
 end
