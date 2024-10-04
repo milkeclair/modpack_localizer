@@ -29,8 +29,6 @@ module JpQuest
       super(@file_path)
     end
 
-    private
-
     def extract_oneline(line, is_desc: false)
       return line.strip.split(":", 2)[1] unless is_desc
 

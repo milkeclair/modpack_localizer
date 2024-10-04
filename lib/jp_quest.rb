@@ -26,5 +26,12 @@ module JpQuest
         # puts "----------------"
       end
     end
+
+    def perform_directly(dir_path, expand_path: false)
+      dir_path = File.expand_path(dir_path) if expand_path
+      Dir.glob("#{dir_path}/*.snbt").each do |file_path|
+        perform(file_path)
+      end
+    end
   end
 end
