@@ -6,8 +6,12 @@ require_relative "jp_quest/reader"
 
 module JpQuest
   class Performer
-    def initialize(output_logs: true, except_words: [])
-      @translator = JpTranslatorFromGpt::Translator.new(output_logs: output_logs, except_words: except_words)
+    def initialize(output_logs: true, except_words: [], exchange_language: "")
+      @translator = JpTranslatorFromGpt::Translator.new(
+        output_logs: output_logs,
+        except_words: except_words,
+        exchange_language: exchange_language
+      )
     end
 
     def perform(file_path)
@@ -18,7 +22,7 @@ module JpQuest
         puts "start_line: #{f[:start_line]}, end_line: #{f[:end_line]}"
         puts "----------------"
       end
-      # @translator.translate_to_jp(file)
+      # @translator.translate(file)
     end
   end
 end
