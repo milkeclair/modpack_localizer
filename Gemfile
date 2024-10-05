@@ -15,4 +15,4 @@ gem "rubocop-rspec", "~> 3.0.5"
 
 gem "jp_translator_from_gpt", "~> 1.1.0"
 
-gem "licensed"
+gem "licensed", "~> 5.0.0"
