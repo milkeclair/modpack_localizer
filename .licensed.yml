@@ -1,0 +1,10 @@
+name: "jp_quest"
+
+allowed:
+  - mit
+  - other
+  - wtfpl
+  - apache-2.0
+
+# bundle exec licensed cache
+# bundle exec licensed status
