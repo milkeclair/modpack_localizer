@@ -92,7 +92,6 @@ module JpQuest
         start_line: index + 1,
         end_line: index + 1,
         indent: indent
-
       }
     end
 

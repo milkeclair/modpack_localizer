@@ -24,12 +24,13 @@ module JpQuest
     # @return [void]
     def perform(file_path)
       # TODO: 翻訳後の行数が元の行数と異なる場合、元の行数分後ろに空行を追加する
-      file = JpQuest::Reader.new(file_path).extract_descriptions
-      puts file.length
-      file.each do |f|
-        puts f[:description]
-        puts "start_line: #{f[:start_line]}, end_line: #{f[:end_line]}, indent: #{f[:indent]}"
-        # translated_text = @translator.translate(f[:description])
+      results = JpQuest::Reader.new(file_path).extract_descriptions
+      puts "file_path: #{file_path}"
+      puts "results: #{results.length}"
+      results.each do |r|
+        puts r[:description]
+        puts "start_line: #{r[:start_line]}, end_line: #{r[:end_line]}, indent: #{r[:indent]}"
+        # translated_text = @translator.translate(r[:description])
         # puts translated_text
         puts "----------------"
       end
