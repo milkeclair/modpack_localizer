@@ -2,6 +2,7 @@
 
 require "jp_translator_from_gpt"
 require_relative "jp_quest/version"
+require_relative "jp_quest/error"
 require_relative "jp_quest/reader"
 
 module JpQuest
@@ -23,6 +24,9 @@ module JpQuest
     # @param [String] file_path ファイルのパス
     # @return [void]
     def perform(file_path)
+      file_path = File.expand_path(file_path)
+      validate_perform(file_path)
+
       # TODO: 翻訳後の行数が元の行数と異なる場合、元の行数分後ろに空行を追加する
       results = JpQuest::Reader.new(file_path).extract_descriptions
       puts "file_path: #{file_path}"
@@ -40,10 +44,24 @@ module JpQuest
     #
     # @param [String] dir_path ディレクトリのパス
     # @return [void]
-    def perform_directly(dir_path)
-      Dir.glob("#{dir_path}/*.snbt").each do |file_path|
+    def perform_directly(dir_path: "quests")
+      dir_path = File.expand_path(dir_path)
+      validate_perform(dir_path)
+
+      # **でサブディレクトリも含めて取得
+      Dir.glob("#{dir_path}/**.snbt").each do |file_path|
         perform(file_path)
       end
+    end
+
+    # ファイルの存在を確認する
+    # 存在しない場合はPathNotFoundErrorを投げる
+    #
+    # @param [String] path ファイルのパス
+    # @return [void]
+    def self.validate_perform(path)
+      path = File.expand_path(path)
+      raise JpQuest::PathNotFoundError.new(path) unless File.exist?(path)
     end
   end
 end
