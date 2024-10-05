@@ -39,10 +39,8 @@ module JpQuest
     # ディレクトリ内のファイルを翻訳して出力する
     #
     # @param [String] dir_path ディレクトリのパス
-    # @param [Boolean] full_path 絶対パスかどうか
     # @return [void]
-    def perform_directly(dir_path, full_path: false)
-      dir_path = File.expand_path(dir_path) if full_path
+    def perform_directly(dir_path)
       Dir.glob("#{dir_path}/*.snbt").each do |file_path|
         perform(file_path)
       end
