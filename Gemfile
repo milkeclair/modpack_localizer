@@ -14,5 +14,3 @@ gem "rubocop-rake", "~> 0.6.0"
 gem "rubocop-rspec", "~> 3.0.5"
 
 gem "jp_translator_from_gpt", "~> 1.1.0"
-
-gem "licensed", "~> 5.0.0"
