@@ -40,6 +40,14 @@ module JpQuest
       super(@file_path)
     end
 
+    # インデントを数える
+    #
+    # @param [String] unstripped_line stripされていない行
+    # @return [Integer] インデントの数
+    def count_indent(unstripped_line)
+      unstripped_line.length - unstripped_line.lstrip.length
+    end
+
     # title: "some title"のような形式から、"some title"を抽出する
     # 説明の場合は、description: ["some description"]のような形式から、"some description"を抽出する
     #
@@ -47,14 +55,15 @@ module JpQuest
     # @param [Boolean] is_desc 説明かどうか
     # @return [String] タイトル or サブタイトル or 説明
     def extract_oneline(line, is_desc: false)
-      return line.strip.split(":", 2)[1] unless is_desc
+      stripped_line = line.strip
+      return stripped_line.split(":", 2)[1] unless is_desc
 
       if oneline_description?(line)
-        line[DESC_START_LENGTH..DESC_END_LENGTH].strip
+        stripped_line[DESC_START_LENGTH..DESC_END_LENGTH]
       elsif start_of?(line, key: :description)
-        line.strip.split("[", 2)[1]
+        stripped_line.split("[", 2)[1]
       else
-        line.strip.split("]", 2)[0]
+        stripped_line.split("]", 2)[0]
       end
     end
 
@@ -63,7 +72,8 @@ module JpQuest
     # @param [String] line 行
     # @return [Boolean]
     def oneline_description?(line)
-      start_of?(line, key: :description) && line.strip.end_with?("]")
+      stripped_line = line.strip
+      start_of?(line, key: :description) && stripped_line.end_with?("]")
     end
 
     # どのコンテンツの開始行か
@@ -72,13 +82,15 @@ module JpQuest
     # @param [Symbol] key コンテンツの種類
     # @return [Boolean]
     def start_of?(line, key:)
+      stripped_line = line.strip
+
       case key
       when :title
-        line.strip.start_with?("title:")
+        stripped_line.start_with?("title:")
       when :subtitle
-        line.strip.start_with?("subtitle:")
+        stripped_line.start_with?("subtitle:")
       when :description
-        line.strip.start_with?("description: [")
+        stripped_line.start_with?("description: [")
       end
     end
   end
