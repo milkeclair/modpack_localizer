@@ -23,17 +23,15 @@ module JpQuest
     # @param [String] file_path ファイルのパス
     # @return [void]
     def perform(file_path)
-      file = JpQuest::Reader.new(file_path).extract_titles
+      # TODO: 翻訳後の行数が元の行数と異なる場合、元の行数分後ろに空行を追加する
+      file = JpQuest::Reader.new(file_path).extract_descriptions
       puts file.length
       file.each do |f|
-        # puts f[:description]
-        # puts "start_line: #{f[:start_line]}, end_line: #{f[:end_line]}, indent: #{f[:indent]}"
-        puts f[:title]
-        puts "line: #{f[:line]}, indent: #{f[:indent]}"
-        puts "----------------"
+        puts f[:description]
+        puts "start_line: #{f[:start_line]}, end_line: #{f[:end_line]}, indent: #{f[:indent]}"
         # translated_text = @translator.translate(f[:description])
-        # p translated_text
-        # puts "----------------"
+        # puts translated_text
+        puts "----------------"
       end
     end
 
