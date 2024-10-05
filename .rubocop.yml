@@ -2,7 +2,7 @@ AllCops:
   TargetRubyVersion: 3.0
   NewCops: enable
   Exclude:
-    - "bin/**/*"
+    - "bin/*"
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
@@ -44,4 +44,3 @@ Style/RaiseArgs:
 require:
   - rubocop-rake
   - rubocop-rspec
-  - rubocop-factory_bot
