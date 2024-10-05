@@ -83,15 +83,13 @@ module JpQuest
     # @return [Boolean]
     def start_of?(line, key:)
       stripped_line = line.strip
+      sections = {
+        title: "title:",
+        subtitle: "subtitle:",
+        description: "description: ["
+      }
 
-      case key
-      when :title
-        stripped_line.start_with?("title:")
-      when :subtitle
-        stripped_line.start_with?("subtitle:")
-      when :description
-        stripped_line.start_with?("description: [")
-      end
+      stripped_line.start_with?(sections[key])
     end
   end
 end
