@@ -21,21 +21,21 @@ module JpQuest
 
     # タイトルを抽出する
     #
-    # @return [Array<Hash>] タイトルと行番号の配列
+    # @return [Array<Hash>] タイトル、行番号、インデントの配列
     def extract_titles
       super(@file_path)
     end
 
     # サブタイトルを抽出する
     #
-    # @return [Array<Hash>] サブタイトルと行番号の配列
+    # @return [Array<Hash>] サブタイトル、行番号、インデントの配列
     def extract_subtitles
       super(@file_path)
     end
 
     # 説明を抽出する
     #
-    # @return [Array<Hash>] 説明、開始行、終了行の配列
+    # @return [Array<Hash>] 説明、開始行、終了行、インデントの配列
     def extract_descriptions
       super(@file_path)
     end
