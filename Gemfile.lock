@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     jp_quest (0.1.0)
+      jp_translator_from_gpt (~> 1.1.0)
 
 GEM
   remote: https://rubygems.org/
