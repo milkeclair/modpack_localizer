@@ -25,7 +25,7 @@ module JpQuest
     # @return [void]
     def perform(file_path)
       file_path = File.expand_path(file_path)
-      validate_perform(file_path)
+      validate_path(file_path)
 
       # TODO: 翻訳後の行数が元の行数と異なる場合、元の行数分後ろに空行を追加する
       results = JpQuest::Reader.new(file_path).extract_descriptions
@@ -46,7 +46,7 @@ module JpQuest
     # @return [void]
     def perform_directly(dir_path: "quests")
       dir_path = File.expand_path(dir_path)
-      validate_perform(dir_path)
+      validate_path(dir_path)
 
       # **でサブディレクトリも含めて取得
       Dir.glob("#{dir_path}/**.snbt").each do |file_path|
@@ -59,7 +59,7 @@ module JpQuest
     #
     # @param [String] path ファイルのパス
     # @return [void]
-    def self.validate_perform(path)
+    def validate_path(path)
       path = File.expand_path(path)
       raise JpQuest::PathNotFoundError.new(path) unless File.exist?(path)
     end
