@@ -44,3 +44,4 @@ Style/RaiseArgs:
 require:
   - rubocop-rake
   - rubocop-rspec
+  - rubocop-factory_bot
