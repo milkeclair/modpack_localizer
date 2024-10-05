@@ -13,7 +13,7 @@ module JpQuest
         indent = count_indent(line)
 
         if oneline?(line)
-          descs << build_oneline(line, index)
+          descs << build_oneline(line, index, indent)
         elsif start_line?(line)
           start_line, desc_content = handle_start_line(line, index)
         elsif end_line?(line, start_line)
