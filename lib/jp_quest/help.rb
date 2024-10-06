@@ -39,8 +39,8 @@ module JpQuest
         2. Add #{green("OPENAI_API_KEY=your_api_key")} to .env
         3. Optional: Add #{green("OPENAI_MODEL=some_openai_model")} to .env (default: gpt-4o-mini)
         4. Add "quests" directory to your project
-        5. Add #{green("require \"jp_quest\"")}
-        6. exec #{green("bundle install")} bash command
+        5. #{green("gem install jp_quest")} or #{green("gem \"jp_quest\"")}
+        6. Add #{green("require \"jp_quest\"")}
         7. Add #{green("jp_quest = JpQuest::Performer.new")}
         8. #{green("jp_quest.perform(\"file_path\")")} or
            #{green("jp_quest.perform_directly(dir_path: \"dir_path\")")}
