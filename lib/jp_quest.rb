@@ -2,6 +2,7 @@
 
 require "jp_translator_from_gpt"
 require_relative "jp_quest/version"
+require_relative "jp_quest/help"
 require_relative "jp_quest/error"
 require_relative "jp_quest/reader"
 
@@ -10,13 +11,16 @@ module JpQuest
     # @param [Boolean] output_logs ログを出力するか
     # @param [Array<String>] except_words 翻訳しない単語
     # @param [String] exchange_language どの言語に翻訳するか
+    # @param [Boolean] display_help ヘルプを表示するか
     # @return [JpQuest::Performer]
-    def initialize(output_logs: true, except_words: [], exchange_language: "japanese")
+    def initialize(output_logs: true, except_words: [], exchange_language: "japanese", display_help: false)
       @translator = JpTranslatorFromGpt::Translator.new(
         output_logs: output_logs,
         except_words: except_words,
         exchange_language: exchange_language
       )
+
+      JpQuest.help if display_help
     end
 
     # ファイルを翻訳して出力する
