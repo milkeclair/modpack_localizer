@@ -5,6 +5,7 @@ require_relative "jp_quest/version"
 require_relative "jp_quest/help"
 require_relative "jp_quest/error"
 require_relative "jp_quest/reader"
+require_relative "jp_quest/writer"
 
 module JpQuest
   class Performer
@@ -36,10 +37,10 @@ module JpQuest
       puts "file_path: #{file_path}"
       puts "results: #{results.length}"
       results.each do |r|
-        puts r[:description]
+        puts r[:text]
         puts "start_line: #{r[:start_line]}, end_line: #{r[:end_line]}, indent: #{r[:indent]}"
-        # translated_text = @translator.translate(r[:description])
-        # puts translated_text
+        r[:text] = @translator.translate(r[:text])
+        JpQuest::Writer.new(file_path).overwrite(r)
         puts "----------------"
       end
     end
