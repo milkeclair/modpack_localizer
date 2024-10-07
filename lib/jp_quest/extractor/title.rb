@@ -11,8 +11,10 @@ module JpQuest
         next unless start_of?(line, key: :title)
 
         titles << {
+          type: :title,
           text: extract_oneline(line),
-          line: index + 1,
+          start_line: index,
+          end_line: index,
           indent: count_indent(line)
         }
       end

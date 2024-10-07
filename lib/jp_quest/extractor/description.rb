@@ -28,7 +28,7 @@ module JpQuest
         if oneline?(line)
           descs << build_oneline(line, index, indent)
         elsif start_line?(line)
-          start_line = index + 1
+          start_line = index
         elsif middle_line?(line, start_line)
           desc_content << line.strip
         elsif end_line?(line, start_line)
@@ -83,9 +83,10 @@ module JpQuest
     # @return [Hash] 説明、開始行番号、終了行番号、インデントのハッシュ
     def build_oneline(line, index, indent)
       {
+        type: :description,
         text: extract_oneline(line, is_desc: true),
-        start_line: index + 1,
-        end_line: index + 1,
+        start_line: index,
+        end_line: index,
         indent: indent
       }
     end
@@ -99,9 +100,10 @@ module JpQuest
     # @return [Hash] 説明、開始行番号、終了行番号、インデントのハッシュ
     def build_multiline(content, start_line, index, indent)
       {
+        type: :description,
         text: content.join("\n"),
         start_line: start_line,
-        end_line: index + 1,
+        end_line: index,
         indent: indent
       }
     end
