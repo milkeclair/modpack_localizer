@@ -6,11 +6,12 @@ module JpQuest
     # @return [Array<Hash>] サブタイトルと行番号の配列
     def extract_subtitles(file_path)
       subtitles = []
-      File.open(file_path, "r").each_with_index do |line, index|
+      lines = File.readlines(file_path)
+      lines.each_with_index do |line, index|
         next unless start_of?(line, key: :subtitle)
 
         subtitles << {
-          subtitle: extract_oneline(line),
+          text: extract_oneline(line),
           line: index + 1,
           indent: count_indent(line)
         }

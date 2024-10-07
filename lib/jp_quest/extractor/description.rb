@@ -5,27 +5,22 @@ module JpQuest
     # @param [String] file_path ファイルのパス
     # @return [Array<Hash>] 説明、開始行番号、終了行番号の配列
     def extract_descriptions(file_path)
-      descs = []
-
-      File.open(file_path, "r") do |file|
-        descs = extract_from_file(file)
-      end
-
-      descs
+      lines = File.readlines(file_path)
+      extract_from_file(lines)
     end
 
     private
 
     # ファイルから説明を抽出する
     #
-    # @param [File] file ファイル
+    # @param [Array<String>] lines 行の配列
     # @return [Array<Hash>] 説明、開始行番号、終了行番号、インデントのハッシュの配列
-    def extract_from_file(file)
+    def extract_from_file(lines)
       descs = []
       desc_content = []
       start_line = nil
 
-      file.each_with_index do |line, index|
+      lines.each_with_index do |line, index|
         indent = count_indent(line)
 
         # 1行の説明の場合はそのままハッシュに変換
@@ -88,7 +83,7 @@ module JpQuest
     # @return [Hash] 説明、開始行番号、終了行番号、インデントのハッシュ
     def build_oneline(line, index, indent)
       {
-        description: extract_oneline(line, is_desc: true),
+        text: extract_oneline(line, is_desc: true),
         start_line: index + 1,
         end_line: index + 1,
         indent: indent
@@ -98,13 +93,13 @@ module JpQuest
     # 複数行の処理
     #
     # @param [Array<String>] content 説明の配列
-    # @param [Integer] start_line 開始行番号番号番号
+    # @param [Integer] start_line 開始行番号
     # @param [Integer] index 行番号
     # @param [Integer] indent インデント
-    # @return [Hash] 説明、開始行番号、終了行番号のハッシュ
+    # @return [Hash] 説明、開始行番号、終了行番号、インデントのハッシュ
     def build_multiline(content, start_line, index, indent)
       {
-        description: content.join("\n"),
+        text: content.join("\n"),
         start_line: start_line,
         end_line: index + 1,
         indent: indent
