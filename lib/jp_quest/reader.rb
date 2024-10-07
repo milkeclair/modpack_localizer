@@ -19,6 +19,17 @@ module JpQuest
       @file_path = file_path
     end
 
+    # タイトル、サブタイトル、説明を抽出する
+    #
+    # @return [Array<Array<Hash>>] タイトル、サブタイトル、説明の配列
+    def extract_all
+      titles = extract_titles
+      subtitles = extract_subtitles
+      descriptions = extract_descriptions
+
+      [titles, subtitles, descriptions]
+    end
+
     # タイトルを抽出する
     #
     # @return [Array<Hash>] タイトル、行番号、インデントの配列
