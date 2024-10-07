@@ -16,3 +16,5 @@ gem "rubocop-rspec", "~> 3.0.5"
 gem "jp_translator_from_gpt", "~> 1.1.0"
 
 gem "rainbow", "~> 3.1.1"
+
+gem "ruby-progressbar", "~> 1.13.0"
