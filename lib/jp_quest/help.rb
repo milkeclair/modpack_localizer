@@ -1,7 +1,7 @@
 require "rainbow"
 
 module JpQuest
-  # ヘルプを表示する
+  # JpQuest gemについてのヘルプを表示する
   #
   # @return [void]
   def self.help
@@ -16,12 +16,18 @@ module JpQuest
     HELP
   end
 
+  # 警告
+  #
+  # @return [String]
   def self.help_warning
     <<~WARNING
       #{red("Warning:").bold} Please be careful your OpenAI API usage cost.
     WARNING
   end
 
+  # gemの説明
+  #
+  # @return [String]
   def self.help_intro
     <<~INTRO
       #{cyan("Introduction:").bold}
@@ -32,6 +38,9 @@ module JpQuest
     INTRO
   end
 
+  # 使用手順
+  #
+  # @return [String]
   def self.help_steps
     <<~STEPS
       #{cyan("Steps:").bold}
@@ -48,6 +57,9 @@ module JpQuest
     STEPS
   end
 
+  # newメソッドのオプション
+  #
+  # @return [String]
   def self.help_init_options
     <<~OPTIONS
       #{cyan("Initialize Options:").bold}
@@ -66,6 +78,9 @@ module JpQuest
     OPTIONS
   end
 
+  # その他gemに関する情報
+  #
+  # @return [String]
   def self.help_information
     <<~INFORMATION
       #{cyan("Information:").bold}
@@ -78,18 +93,34 @@ module JpQuest
     INFORMATION
   end
 
+  # 出力を青色にする
+  #
+  # @param [String] str
+  # @return [String]
   def self.cyan(str)
     Rainbow(str).cyan
   end
 
+  # 出力を緑色にする
+  #
+  # @param [String] str
+  # @return [String]
   def self.green(str)
     Rainbow(str).green
   end
 
+  # 出力を赤色にする
+  #
+  # @param [String] str
+  # @return [String]
   def self.red(str)
     Rainbow(str).red
   end
 
+  # 出力をリンクのスタイルにする
+  #
+  # @param [String] str
+  # @return [String]
   def self.link(str)
     Rainbow(str).underline.bright
   end
