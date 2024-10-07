@@ -2,7 +2,7 @@
 
 require_relative "lib/jp_quest"
 
-performer = JpQuest::Performer.new(output_logs: false, display_help: true)
+performer = JpQuest::Performer.new(output_logs: false)
 # dir_path = "quests"
 file_path = "hoge.snbt"
 
