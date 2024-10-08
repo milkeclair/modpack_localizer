@@ -1,6 +1,6 @@
 ## JpQuest
 
-Translator for `.snbt` files. (title, subtitle, description)  
+Translator for FTBQuest. (title, subtitle, description)  
 If you want to translate to other languages than Japanese,  
 please add the `exchange_language` option during initialization.  
 Can always get help with `JpQuest.help`
