@@ -13,9 +13,8 @@ module JpQuest
     def format_overwritable_lines(content, indent)
       mid_indent = middle_indent(content[:indent])
       indented_lines = add_indent_for_middle_lines(content, mid_indent)
-
-      add_missing_lines(indented_lines, content, mid_indent)
-      format_for_snbt(indented_lines, indent, content[:type])
+      formatted_lines = add_missing_lines(indented_lines, content, mid_indent)
+      format_for_snbt(formatted_lines, indent, content[:type])
     end
 
     # SNBT形式に整形
@@ -29,7 +28,7 @@ module JpQuest
       lines.map!(&:strip) unless type == :description
 
       formatted_lines =
-        if lines.size == 1
+        if lines.length == 1
           type == :description ? "[#{lines[0].strip}]" : lines[0].strip.to_s
         else
           # description: [
@@ -50,13 +49,13 @@ module JpQuest
     # @param [String] middle_indent 中間行のインデント
     # @return [void]
     def add_missing_lines(lines, content, middle_indent)
-      return if lines.size == 1
-
       required_lines = extract_required_line_counts(content)
 
-      while lines.size < required_lines
+      while lines.length < required_lines
         lines << empty_middle_line(middle_indent)
       end
+
+      lines
     end
 
     # 必要な行数を抽出
@@ -117,11 +116,14 @@ module JpQuest
       if line.strip.match?(deletable_regs[1])
         line.gsub(dup_reg, '""')
       else
+        # 行間にある余計なダブルクオートを削除するため、一度全てのダブルクオートを削除している
         line = line.gsub('"', "")
-        # インデントの調整と行頭のダブルクオートの追加
-        indent_count = normalize_indent(line[/^\s*/].size)
-        line = line.sub(/^(\s*)/, "#{" " * indent_count}\"")
-        # 行末のダブルクオート
+        # インデントの調整
+        indent_count = normalize_indent(line[/^\s*/].length)
+        line_start = /^(\s*)/
+        # 行頭にインデントとダブルクオートを追加
+        line = line.sub(line_start, "#{" " * indent_count}\"")
+        # 行末のダブルクオートを追加
         "#{line}\""
       end
     end
