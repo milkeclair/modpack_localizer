@@ -11,3 +11,6 @@
 .rspec_status
 .env
 .licenses/
+/quests/
+/output/
+/translator_logs/
