@@ -33,6 +33,8 @@ Gem::Specification.new do |spec|
 
   # Uncomment to register a new dependency of your gem
   spec.add_dependency "jp_translator_from_gpt", "~> 1.1.0"
+  spec.add_dependency "rainbow", "~> 3.1.1"
+  spec.add_dependency "ruby-progressbar", "~> 1.13.0"
 
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html
