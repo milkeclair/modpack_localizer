@@ -56,7 +56,7 @@ module JpQuest
       validate_path(dir_path)
 
       # **でサブディレクトリも含めて取得
-      Dir.glob("#{dir_path}/**.snbt").each do |file_path|
+      Dir.glob("#{dir_path}/**/*.snbt").each do |file_path|
         perform(file_path)
       end
     end
