@@ -43,6 +43,8 @@ module JpQuest
         @writer.overwrites(result)
         @progress_bar.increment
       end
+
+      puts "Completed!"
     end
 
     # ディレクトリ内のファイルを翻訳して出力する
