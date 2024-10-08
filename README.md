@@ -15,7 +15,7 @@ Can always get help with `JpQuest.help`
 2. Make `.env` file
 3. Add `OPENAI_API_KEY=your_api_key` to `.env`
 4. Optional: Add `OPENAI_MODEL=some_openai_model` to `.env` **(default: gpt-4o-mini)**
-5. Add `some.snbt` or `quests` directory files to `quests` directory
+5. Add `some.snbt` or `quests` directory contents to `quests` directory
 6. Check `output` directory
 
 ## Initialize Options
