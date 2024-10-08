@@ -1,10 +1,8 @@
-# frozen_string_literal: true
+require "jp_quest"
 
-require_relative "lib/jp_quest"
+performer = JpQuest::Performer.new
 
-performer = JpQuest::Performer.new(output_logs: false)
-# dir_path = "quests"
-file_path = "hoge.snbt"
+# file_path = "some.snbt"
+# performer.perform(file_path)
 
-performer.perform(file_path)
-# performer.perform_directly(dir_path: dir_path)
+performer.perform_directly
