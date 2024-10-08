@@ -19,6 +19,8 @@ module JpQuest
         except_words: except_words,
         exchange_language: exchange_language
       )
+      @reader = nil
+      @writer = nil
       @progress_bar = nil
 
       JpQuest.help if display_help
@@ -32,15 +34,13 @@ module JpQuest
       file_path = File.expand_path(file_path)
       validate_path(file_path)
 
-      reader = JpQuest::Reader.new(file_path)
-      results = reader.extract_all.flatten
-      writer = JpQuest::Writer.new(file_path)
+      @reader, @writer = JpQuest::Reader.new(file_path), JpQuest::Writer.new(file_path)
+      results = @reader.extract_all.flatten
       @progress_bar = JpQuest.create_progress_bar(file_path, results.length)
+
       results.each do |result|
-        # TODO: なぜか4行ずれることがある
-        puts "start_line: #{result[:start_line]}, end_line: #{result[:end_line]}, indent: #{result[:indent]}"
         result[:text] = @translator.translate(result[:text])
-        writer.overwrites(result)
+        @writer.overwrites(result)
         @progress_bar.increment
       end
     end
