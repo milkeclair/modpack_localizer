@@ -1,3 +1,4 @@
+require_relative "error"
 require_relative "formatter"
 require_relative "indent_helper"
 
@@ -30,6 +31,8 @@ module JpQuest
       File.open(@output_file_path, "w") do |file|
         file.puts formatted_lines
       end
+
+      handle_line_count_error(@output_file_path, lines.length)
     end
 
     private
@@ -51,6 +54,18 @@ module JpQuest
     # @return [Boolean] 最初の上書きかどうか
     def first_overwrite?
       !File.exist?(@output_file_path)
+    end
+
+    # 翻訳前と翻訳後の行数が異なる場合はエラーを発生させる
+    #
+    # @param [String] output_file_path 出力ファイルのパス
+    # @param [Integer] before_line_count 翻訳前の行数
+    # @return [void]
+    def handle_line_count_error(output_file_path, before_line_count)
+      after_line_count = File.readlines(output_file_path).length
+      return if before_line_count == after_line_count
+
+      raise JpQuest::InvalidLineCountError.new(before_line_count, after_line_count)
     end
   end
 end
