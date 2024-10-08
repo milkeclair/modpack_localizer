@@ -2,6 +2,7 @@ require_relative "formatter"
 require_relative "indent_helper"
 
 module JpQuest
+  # 翻訳された内容を整形して出力するクラス
   class Writer
     include IndentHelper
 

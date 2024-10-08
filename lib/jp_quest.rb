@@ -5,6 +5,11 @@ require_relative "jp_quest/version"
 require_relative "jp_quest/help"
 require_relative "jp_quest/performer"
 
+# SNBT形式のファイルを翻訳する
+# 翻訳できるプロパティ
+# - title
+# - subtitle
+# - description
 module JpQuest
   # JpQuest gemについてのヘルプを表示する
   #
@@ -19,14 +24,15 @@ module JpQuest
   # @param [Integer] total プログレスバーの合計数
   # @return [ProgressBar::Base] プログレスバー
   def self.create_progress_bar(file_path, total)
-    # パスの内、カレントディレクトリ配下のパスのみ表示する
+    # パスの内、カレントディレクトリ配下のパス以外は邪魔なので削除
+    # 例: /Users/user/quests/some.snbt -> /quests/some.snbt
     puts "\nFile path: #{file_path.gsub(Dir.pwd, "")}"
 
     ProgressBar.create(
       title: "Translating...",
       total: total,
       progress_mark: "#",
-      format: " %t [%B]",
+      format: "%t [%B]",
       length: 80,
       projector: {
         type: "smoothed",

@@ -1,4 +1,5 @@
 module JpQuest
+  # SNBT形式のファイルからtitle: "some title"を抽出するモジュール
   module TitleExtractor
     # title: "some title"を抽出する
     #

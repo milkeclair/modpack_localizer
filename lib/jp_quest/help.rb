@@ -1,6 +1,7 @@
 require "rainbow"
 
 module JpQuest
+  # JpQuest gemについてのヘルプを表示するクラス
   class Help
     # JpQuest gemについてのヘルプを表示する
     #

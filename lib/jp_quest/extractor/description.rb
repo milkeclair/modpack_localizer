@@ -1,4 +1,5 @@
 module JpQuest
+  # SNBT形式のファイルからdescription: ["some description"]を抽出するモジュール
   module DescriptionExtractor
     # description: ["some description"]を抽出する
     #

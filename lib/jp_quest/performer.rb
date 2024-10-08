@@ -5,6 +5,8 @@ require_relative "reader"
 require_relative "writer"
 
 module JpQuest
+  # 翻訳を実行するクラス
+  # JpTranslatorFromGptを使用して翻訳を行う
   class Performer
     # @param [Boolean] output_logs ログを出力するか
     # @param [Array<String>] except_words 翻訳しない単語

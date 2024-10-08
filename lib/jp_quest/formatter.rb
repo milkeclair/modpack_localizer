@@ -1,6 +1,7 @@
 require_relative "indent_helper"
 
 module JpQuest
+  # 翻訳された内容をSNBT形式に整形するクラス
   class Formatter
     include IndentHelper
 
@@ -8,7 +9,7 @@ module JpQuest
     #
     # @param [Hash] content コンテンツ
     # @param [String] indent インデント
-    # @return [String] 整形したコンテンツ
+    # @return [String] SNBT形式に整形したコンテンツ
     def format_overwritable_lines(content, indent)
       mid_indent = middle_indent(content[:indent])
       indented_lines = add_indent_for_middle_lines(content, mid_indent)

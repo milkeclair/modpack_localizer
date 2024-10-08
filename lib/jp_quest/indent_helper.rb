@@ -1,4 +1,5 @@
 module JpQuest
+  # インデントを扱うモジュール
   module IndentHelper
     # インデントを作成
     #

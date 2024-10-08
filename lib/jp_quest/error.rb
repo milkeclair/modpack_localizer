@@ -1,6 +1,8 @@
 module JpQuest
+  # 基底のエラークラス
   class Error < StandardError; end
 
+  # パスが見つからない場合のエラークラス
   class PathNotFoundError < Error
     # ヒアドキュメントを使うと、先頭と末尾に空行が入る
     # エラーメッセージも変更しやすいのでこうしている

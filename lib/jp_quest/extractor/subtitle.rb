@@ -1,4 +1,5 @@
 module JpQuest
+  # SNBT形式のファイルからsubtitle: "some subtitle"を抽出するモジュール
   module SubtitleExtractor
     # subtitle: "some subtitle"を抽出する
     #
