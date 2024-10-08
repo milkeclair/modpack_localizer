@@ -51,7 +51,7 @@ module JpQuest
     #
     # @param [String] dir_path ディレクトリのパス
     # @return [void]
-    def perform_directly(dir_path: "quests")
+    def perform_directory(dir_path: "quests")
       dir_path = File.expand_path(dir_path)
       validate_path(dir_path)
 

@@ -54,7 +54,7 @@ module JpQuest
           6. Add #{green("require \"jp_quest\"")}
           7. Add #{green("jp_quest = JpQuest::Performer.new")}
           8. #{green("jp_quest.perform(\"file_path\")")} or
-             #{green("jp_quest.perform_directly(dir_path: \"dir_path\")")}
+             #{green("jp_quest.perform_directory(dir_path: \"dir_path\")")}
           9. Check "output" directory
       STEPS
     end
