@@ -11,7 +11,8 @@ module JpQuest
     # @return [JpQuest::Writer]
     def initialize(file_path)
       @input_file_path = file_path
-      @output_file_path = file_path.gsub("quests", "output/quests")
+      # questsとすると、quests.snbtも変換されてしまうので、quests/とする
+      @output_file_path = file_path.gsub("quests/", "output/quests/")
       @formatter = JpQuest::Formatter.new
     end
 
