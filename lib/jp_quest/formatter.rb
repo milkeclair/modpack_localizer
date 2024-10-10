@@ -50,7 +50,7 @@ module JpQuest
     # @param [Hash] content コンテンツ
     # @return [Array<String>] 不要な文字を削除した行
     def prepare_lines_for_snbt(lines, content)
-      lines.map! { |line| delete_quotes(line) }
+      lines.map! { |line| delete_unwanted_symbols(line) }
       lines.map!(&:strip) unless content[:type] == :description
       lines
     end
@@ -94,14 +94,32 @@ module JpQuest
       middle_indent(indent).to_s
     end
 
-    # 不要な引用符を削除
+    # 不要な記号を削除
     #
     # @param [String] line 行
-    # @return [String] 不要な引用符を削除した行
-    def delete_quotes(line)
+    # @return [String] 不要な記号を削除した行
+    def delete_unwanted_symbols(line)
+      line = delete_backslash(line)
+      line = delete_semicolon(line)
       line = delete_dup_quotes(line)
       line = delete_jp_quotes(line)
       delete_curved_quotes(line)
+    end
+
+    # 不要なバックスラッシュを削除
+    #
+    # @param [String] line 行
+    # @return [String] 不要なバックスラッシュを削除した行
+    def delete_backslash(line)
+      line.gsub("\\", "")
+    end
+
+    # 不要なセミコロンを削除
+    #
+    # @param [String] line 行
+    # @return [String] 不要なセミコロンを削除した行
+    def delete_semicolon(line)
+      line.gsub(";", "")
     end
 
     # 不要なダブルクオートを削除
