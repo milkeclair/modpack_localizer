@@ -12,5 +12,7 @@
 .env
 .licenses/
 /quests/
+/dist/quests/
 /output/
+/dist/output/
 /translator_logs/

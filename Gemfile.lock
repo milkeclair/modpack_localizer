@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    jp_quest (0.2.1)
+    jp_quest (0.3.0)
       jp_translator_from_gpt (~> 1.1.0)
       rainbow (~> 3.1.1)
       ruby-progressbar (~> 1.13.0)

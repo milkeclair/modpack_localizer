@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 require "ruby-progressbar"
-require_relative "jp_quest/version"
-require_relative "jp_quest/help"
-require_relative "jp_quest/performer"
+require_relative "jp_quest/util/version"
+require_relative "jp_quest/util/help"
+require_relative "jp_quest/snbt/performer"
 
 # SNBT形式のファイルを翻訳する
 # 翻訳できるプロパティ

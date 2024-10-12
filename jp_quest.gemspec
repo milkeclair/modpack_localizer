@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "lib/jp_quest/version"
+require_relative "lib/jp_quest/util/version"
 
 Gem::Specification.new do |spec|
   spec.name = "jp_quest"

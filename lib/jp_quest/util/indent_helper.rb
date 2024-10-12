@@ -1,6 +1,14 @@
 module JpQuest
   # インデントを扱うモジュール
   module IndentHelper
+    # インデントを数える
+    #
+    # @param [String] unstripped_line stripされていない行
+    # @return [Integer] インデントの数
+    def count_indent(unstripped_line)
+      unstripped_line.length - unstripped_line.lstrip.length
+    end
+
     # インデントを作成
     #
     # @param [Integer] indent インデント数

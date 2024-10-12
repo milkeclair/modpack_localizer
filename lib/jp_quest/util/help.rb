@@ -36,7 +36,7 @@ module JpQuest
           Translator for #{green(".snbt")} files.
           If you want to translate to other languages than Japanese,
           please add the #{green("exchange_language")} option during initialization.
-          Example: #{green("JpQuest::Performer.new(exchange_language: \"English\")")}
+          Example: #{green("JpQuest::SNBT::Performer.new(exchange_language: \"English\")")}
       INTRO
     end
 
@@ -52,7 +52,7 @@ module JpQuest
           4. Add "quests" directory to your project
           5. #{green("gem install jp_quest")} or #{green("gem \"jp_quest\"")}
           6. Add #{green("require \"jp_quest\"")}
-          7. Add #{green("jp_quest = JpQuest::Performer.new")}
+          7. Add #{green("jp_quest = JpQuest::SNBT::Performer.new")}
           8. #{green("jp_quest.perform(\"file_path\")")} or
              #{green("jp_quest.perform_directory(dir_path: \"dir_path\")")}
           9. Check "output" directory
