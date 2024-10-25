@@ -12,7 +12,7 @@ module JpQuest
       # @param [String] indent インデント
       # @return [String] SNBT形式に整形したコンテンツ
       def format_overwritable_lines(content, indent)
-        full_lines = add_missing_lines(content)
+        full_lines = adjust_line_length(content)
         format_for_snbt(full_lines, indent, content)
       end
 
@@ -28,17 +28,16 @@ module JpQuest
         "#{indent}#{content[:type]}: #{formatted_lines}"
       end
 
-      # 不足している行を追加
+      # 行数をstart_line~end_lineと一致させる
       #
       # @param [Hash] content コンテンツ
       # @return [void]
-      def add_missing_lines(content)
+      def adjust_line_length(content)
         required_lines = extract_required_line_counts(content)
         lines = content[:text].split("\n")
 
-        while lines.length < required_lines
-          lines << empty_middle_line(content[:indent])
-        end
+        delete_over_lines(lines, required_lines)
+        add_missing_lines(lines, required_lines, content[:indent])
 
         lines
       end
@@ -86,6 +85,35 @@ module JpQuest
         line_offset, without_brackets = 1, 2
 
         (content[:end_line] - content[:start_line]) + line_offset - without_brackets
+      end
+
+      # 不要な行を削除
+      #
+      # @param [Array<String>] lines 行
+      # @param [Integer] required_lines 必要な行数
+      # @return [void]
+      def delete_over_lines(lines, required_lines)
+        return unless lines.length > required_lines
+
+        gap_length = lines.length - required_lines
+        gap_length.times do
+          index = lines.index("")
+          lines.delete_at(index) if index
+        end
+      end
+
+      # 不足している行を追加
+      #
+      # @param [Array<String>] lines 行
+      # @param [Integer] required_lines 必要な行数
+      # @param [String] indent インデント
+      # @return [void]
+      def add_missing_lines(lines, required_lines, indent)
+        return unless lines.length < required_lines
+
+        while lines.length < required_lines
+          lines << empty_middle_line(indent)
+        end
       end
 
       # 中間行の空行を作成
