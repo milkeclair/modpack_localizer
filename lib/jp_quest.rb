@@ -11,6 +11,15 @@ require_relative "jp_quest/snbt/performer"
 # - subtitle
 # - description
 module JpQuest
+  # quests以下のファイルを全て翻訳する
+  #
+  # @return [void]
+  def self.omakase(lang: "japanese")
+    performers = []
+    performers << JpQuest::SNBT::Performer.new(exchange_language: lang)
+    performers.each(&:perform_directory)
+  end
+
   # JpQuest gemについてのヘルプを表示する
   #
   # @return [void]
