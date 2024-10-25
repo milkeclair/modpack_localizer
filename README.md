@@ -8,6 +8,8 @@ Can always get help with `JpQuest.help`
 #### Example
 
 `JpQuest::SNBT::Performer.new(exchange_language: "English")`
+or if no specific configs required
+`JpQuest.omakase(lang: "English")`
 
 ## Steps
 

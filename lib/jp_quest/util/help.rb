@@ -36,7 +36,10 @@ module JpQuest
           Translator for #{green(".snbt")} files.
           If you want to translate to other languages than Japanese,
           please add the #{green("exchange_language")} option during initialization.
-          Example: #{green("JpQuest::SNBT::Performer.new(exchange_language: \"English\")")}
+          Example:
+            #{green("JpQuest::SNBT::Performer.new(exchange_language: \"English\")")}
+            or if no specific configs required
+            #{green("JpQuest.omakase(lang: \"English\")")}
       INTRO
     end
 
