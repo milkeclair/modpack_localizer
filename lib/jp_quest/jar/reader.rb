@@ -1,4 +1,5 @@
 require "zip"
+require "json"
 require "countries"
 
 module JpQuest
@@ -12,7 +13,9 @@ module JpQuest
       def read
         Zip::File.open(@file_path) do |jar|
           lang = find_lang_json(jar)
-          puts lang
+          raw_json = JSON.parse(lang.get_input_stream.read)
+          decommented_json = reject_comment(raw_json)
+          pp decommented_json
         end
       end
 
@@ -20,6 +23,10 @@ module JpQuest
         lang_files = opened_jar.glob("**/lang/*.json")
 
         lang_files.find { |entry| target_locale_file?(entry, country_name) }
+      end
+
+      def reject_comment(json)
+        json.reject { |key, _| key == "_comment" }
       end
 
       def target_locale_file?(file, country_name)
