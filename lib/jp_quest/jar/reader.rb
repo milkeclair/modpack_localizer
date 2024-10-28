@@ -21,15 +21,18 @@ module JpQuest
           # langフォルダ以外は探索不要
           next unless entry.name.include?("lang")
 
-          country_code = to_country_code(country)
           file_name = extract_file_name(entry.name)
-
-          return entry if file_name.include?("_#{country_code}.json")
+          return entry if locale_file_format?(file_name, country)
         end
       end
 
       def to_country_code(country)
         ISO3166::Country.find_country_by_any_name(country).alpha2.downcase
+      end
+
+      def locale_file_format?(file_name, country)
+        country_code = to_country_code(country)
+        file_name.include?("_#{country_code}.json")
       end
 
       def extract_file_name(file)
