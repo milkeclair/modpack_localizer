@@ -25,8 +25,8 @@ module JpQuest
         lang_files.find { |entry| target_locale_file?(entry, country_name) }
       end
 
-      def reject_comment(json)
-        json.reject { |key, _| key == "_comment" }
+      def reject_comment(hash)
+        hash.reject { |key, _| key == "_comment" }
       end
 
       def target_locale_file?(file, country_name)
