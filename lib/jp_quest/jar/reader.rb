@@ -20,10 +20,9 @@ module JpQuest
 
       def find_lang_json(opened_jar, country_name = @country_name)
         opened_jar.each do |entry|
-          # langフォルダ以外は探索不要
-          next unless entry.name.include?("lang")
+          next unless target_locale_file?(entry, country_name)
 
-          return entry if target_locale_file?(entry, country_name)
+          return entry
         end
       end
 
