@@ -11,14 +11,14 @@ module JpQuest
     class Performer
       # @param [Boolean] output_logs ログを出力するか
       # @param [Array<String>] except_words 翻訳しない単語
-      # @param [String] exchange_language どの言語に翻訳するか
+      # @param [String] language どの言語に翻訳するか
       # @param [Boolean] display_help ヘルプを表示するか
       # @return [JpQuest::SNBT::Performer]
-      def initialize(output_logs: true, except_words: [], exchange_language: "japanese", display_help: true)
+      def initialize(output_logs: true, except_words: [], language: "Japanese", display_help: true)
         @translator = JpTranslatorFromGpt::Translator.new(
           output_logs: output_logs,
           except_words: except_words,
-          exchange_language: exchange_language
+          exchange_language: language
         )
         @reader = nil
         @writer = nil

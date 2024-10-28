@@ -2,14 +2,14 @@
 
 Translator for FTBQuest. (title, subtitle, description)  
 If you want to translate to other languages than Japanese,  
-please add the `exchange_language` option during initialization.  
+please add the `language` option during initialization.  
 Can always get help with `JpQuest.help`
 
 #### Example
 
-`JpQuest::SNBT::Performer.new(exchange_language: "English")`  
+`JpQuest::SNBT::Performer.new(language: "English")`  
 or if no specific configs required  
-`JpQuest.omakase(lang: "English")`
+`JpQuest.omakase(language: "English")`
 
 ## Steps
 
@@ -32,10 +32,10 @@ Want to output OpenAI usage logs?
 Words that you don't want to translate
 **(default: empty array)**
 
-#### exchange_language
+#### language
 
 Which language do you want to translate to?
-**(default: japanese)**
+**(default: Japanese)**
 
 #### display_help
 
