@@ -23,18 +23,19 @@ module JpQuest
           # langフォルダ以外は探索不要
           next unless entry.name.include?("lang")
 
-          file_name = extract_file_name(entry.name)
-          return entry if locale_file_format?(file_name, country_name)
+          return entry if target_locale_file?(entry, country_name)
         end
       end
 
-      def extract_file_name(file)
-        file.split("/").last
+      def target_locale_file?(file, country_name)
+        file_name = extract_file_name(file)
+        country_code = to_country_code(country_name)
+
+        file_name.include?("_#{country_code}.json")
       end
 
-      def locale_file_format?(file_name, country_name)
-        country_code = to_country_code(country_name)
-        file_name.include?("_#{country_code}.json")
+      def extract_file_name(file)
+        file.name.split("/").last
       end
 
       def to_country_code(country_name)
