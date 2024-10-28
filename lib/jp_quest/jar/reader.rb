@@ -3,8 +3,6 @@ require "countries"
 
 module JpQuest
   module Jar
-    Jar = Zip
-
     class Reader
       def initialize(file_path, country_name)
         @file_path = file_path
@@ -12,7 +10,7 @@ module JpQuest
       end
 
       def read
-        Jar::File.open(@file_path) do |jar|
+        Zip::File.open(@file_path) do |jar|
           lang = find_lang_json(jar)
           puts lang
         end
