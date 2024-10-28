@@ -20,3 +20,7 @@ gem "jp_translator_from_gpt", "~> 1.1.0"
 gem "rainbow", "~> 3.1.1"
 
 gem "ruby-progressbar", "~> 1.13.0"
+
+gem "rubyzip", "3.0.0.alpha"
+
+gem "countries", "~> 7.0.0"

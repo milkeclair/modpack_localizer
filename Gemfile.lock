@@ -10,6 +10,8 @@ GEM
   remote: https://rubygems.org/
   specs:
     ast (2.4.2)
+    countries (7.0.0)
+      unaccent (~> 0.3)
     diff-lcs (1.5.1)
     dotenv (3.1.4)
     event_stream_parser (1.0.0)
@@ -72,6 +74,8 @@ GEM
       faraday (>= 1)
       faraday-multipart (>= 1)
     ruby-progressbar (1.13.0)
+    rubyzip (3.0.0.alpha)
+    unaccent (0.4.0)
     unicode-display_width (2.6.0)
     uri (0.13.1)
     yard (0.9.37)
@@ -81,6 +85,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  countries (~> 7.0.0)
   jp_quest!
   jp_translator_from_gpt (~> 1.1.0)
   rainbow (~> 3.1.1)
@@ -90,6 +95,7 @@ DEPENDENCIES
   rubocop-rake (~> 0.6.0)
   rubocop-rspec (~> 3.0.5)
   ruby-progressbar (~> 1.13.0)
+  rubyzip (= 3.0.0.alpha)
   yard (~> 0.9.37)
 
 BUNDLED WITH
