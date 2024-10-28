@@ -4,6 +4,7 @@ require "ruby-progressbar"
 require_relative "jp_quest/util/version"
 require_relative "jp_quest/util/help"
 require_relative "jp_quest/snbt/performer"
+require_relative "jp_quest/jar/performer"
 
 # SNBT形式のファイルを翻訳する
 # 翻訳できるプロパティ
@@ -14,9 +15,10 @@ module JpQuest
   # quests以下のファイルを全て翻訳する
   #
   # @return [void]
-  def self.omakase(lang: "japanese")
+  def self.omakase(lang: "japanese", country: "japan")
     performers = []
     performers << JpQuest::SNBT::Performer.new(language: lang)
+    performers << JpQuest::Jar::Performer.new(language: lang, country: country)
     performers.each(&:perform_directory)
   end
 
