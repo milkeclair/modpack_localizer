@@ -19,11 +19,9 @@ module JpQuest
       end
 
       def find_lang_json(opened_jar, country_name = @country_name)
-        opened_jar.each do |entry|
-          next unless target_locale_file?(entry, country_name)
+        lang_files = opened_jar.glob("**/lang/*.json")
 
-          return entry
-        end
+        lang_files.find { |entry| target_locale_file?(entry, country_name) }
       end
 
       def target_locale_file?(file, country_name)
