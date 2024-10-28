@@ -36,7 +36,7 @@ module JpQuest
       end
 
       def to_country_code(country_name)
-        ISO3166::Country.find_country_by_any_name(country_name).alpha2.downcase
+        ISO3166::Country.find_country_by_any_name(country_name)&.alpha2&.downcase
       end
     end
   end
