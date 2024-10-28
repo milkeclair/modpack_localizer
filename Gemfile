@@ -24,3 +24,5 @@ gem "ruby-progressbar", "~> 1.13.0"
 gem "rubyzip", "3.0.0.alpha"
 
 gem "countries", "~> 7.0.0"
+
+gem "json", "~> 2.2"
