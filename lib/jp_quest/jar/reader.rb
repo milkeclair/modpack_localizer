@@ -26,7 +26,7 @@ module JpQuest
 
       def target_locale_file?(file, country_name)
         file_name = extract_file_name(file)
-        country_code = to_country_code(country_name)
+        country_code = get_country_code(country_name)
 
         file_name.include?("_#{country_code}.json")
       end
@@ -35,7 +35,7 @@ module JpQuest
         file.name.split("/").last
       end
 
-      def to_country_code(country_name)
+      def get_country_code(country_name)
         ISO3166::Country.find_country_by_any_name(country_name)&.alpha2&.downcase
       end
     end
