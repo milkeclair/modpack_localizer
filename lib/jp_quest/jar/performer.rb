@@ -27,12 +27,12 @@ module JpQuest
         validate_path(file_path)
 
         @reader, @writer = JpQuest::Jar::Reader.new(file_path, @country_name), JpQuest::Jar::Writer.new(file_path)
-        results = @reader.extract_json
+        results = @reader.extract
         @progress_bar = JpQuest.create_progress_bar(file_path, results.length)
 
         if need_translation?(results)
-          translated_json = translate(results)
-          @writer.write_resource_pack(translated_json)
+          results[:json] = translate(results[:json])
+          @writer.write_resource_pack(results)
           puts "Completed!"
         else
           @progress_bar.finish
