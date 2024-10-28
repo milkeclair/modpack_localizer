@@ -12,14 +12,14 @@ module JpQuest
       end
 
       def read
-        Jar::File.open(@file_path) do |zip_file|
-          lang = find_lang_json(zip_file)
+        Jar::File.open(@file_path) do |jar|
+          lang = find_lang_json(jar)
           puts lang
         end
       end
 
-      def find_lang_json(zip_file, country_name = @country_name)
-        zip_file.each do |entry|
+      def find_lang_json(opened_jar, country_name = @country_name)
+        opened_jar.each do |entry|
           # langフォルダ以外は探索不要
           next unless entry.name.include?("lang")
 
