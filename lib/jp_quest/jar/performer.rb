@@ -15,9 +15,7 @@ module JpQuest
           exchange_language: language
         )
         @country_name = country
-        @reader = nil
-        @writer = nil
-        @progress_bar = nil
+        @reader, @writer, @progress_bar = nil
 
         JpQuest.help if display_help
       end
