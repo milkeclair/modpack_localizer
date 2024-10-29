@@ -28,7 +28,7 @@ module JpQuest
 
         init_reader_and_writer(file_path)
         results = @reader.extract_lang_json_and_meta_data
-        @progress_bar = JpQuest.create_progress_bar(file_path, results[:json].length)
+        init_progress_bar(file_path, results[:json].length)
 
         if need_translation?(results) ? translate(results) : feedback_unnecessary_translation(results)
       end
@@ -50,6 +50,10 @@ module JpQuest
       def init_reader_and_writer(file_path)
         @reader = JpQuest::Jar::Reader.new(file_path, @country_name)
         @writer = JpQuest::Jar::Writer.new(file_path)
+      end
+
+      def init_progress_bar(file_path, length)
+        @progress_bar = JpQuest.create_progress_bar(file_path, length)
       end
 
       def need_translation?(results)
