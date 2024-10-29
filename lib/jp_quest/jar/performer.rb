@@ -30,14 +30,7 @@ module JpQuest
         results = @reader.extract_lang_json_and_meta_data
         @progress_bar = JpQuest.create_progress_bar(file_path, results[:json].length)
 
-        if need_translation?(results)
-          results[:json] = translate(results[:json])
-          @writer.write_resource_pack(results)
-          puts "Completed!"
-        else
-          @progress_bar.finish
-          puts already_has_translated_file_message(results)
-        end
+        if need_translation?(results) ? translate(results) : feedback_unnecessary_translation(results)
       end
 
       def perform_directory(dir_path: "mods")
@@ -69,6 +62,13 @@ module JpQuest
           @progress_bar.increment
         end
 
+        @writer.make_resource_pack(results)
+        puts "Completed!"
+      end
+
+      def feedback_unnecessary_translation(results)
+        @progress_bar.finish
+        puts already_has_translated_file_message(results)
       end
 
       def already_has_translated_file_message(results)
