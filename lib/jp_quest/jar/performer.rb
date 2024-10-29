@@ -37,7 +37,7 @@ module JpQuest
         dir_path = File.expand_path(dir_path)
         validate_path(dir_path)
 
-        Dir.glob("#{dir_path}/**/*.jar").each do |file_path|
+        Dir.glob("#{dir_path}/*.jar").each do |file_path|
           perform(file_path)
         end
       end
