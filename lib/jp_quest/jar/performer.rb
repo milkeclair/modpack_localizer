@@ -28,7 +28,7 @@ module JpQuest
 
         init_reader_and_writer(file_path)
         results = @reader.extract_lang_json_and_meta_data
-        @progress_bar = JpQuest.create_progress_bar(file_path, results.length)
+        @progress_bar = JpQuest.create_progress_bar(file_path, results[:json].length)
 
         if need_translation?(results)
           results[:json] = translate(results[:json])
@@ -63,12 +63,12 @@ module JpQuest
         results[:need_translation]
       end
 
-      def translate(json)
-        json.each do |key, value|
-          json[key] = @translator.translate(value)
+      def translate(results)
+        results[:json].each do |key, value|
+          results[:json][key] = @translator.translate(value)
           @progress_bar.increment
         end
-        json
+
       end
 
       def already_has_translated_file_message(results)
