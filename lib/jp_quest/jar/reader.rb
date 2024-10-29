@@ -10,7 +10,7 @@ module JpQuest
         @country_name = country_name
       end
 
-      def extract_lang_json
+      def extract_lang_json_and_meta_data
         Zip::File.open(@file_path) do |jar|
           # 対象の言語ファイルが存在する場合は翻訳が必要ない
           target_lang_file = find_lang_json(jar)

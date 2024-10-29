@@ -27,7 +27,7 @@ module JpQuest
         validate_path(file_path)
 
         @reader, @writer = JpQuest::Jar::Reader.new(file_path, @country_name), JpQuest::Jar::Writer.new(file_path)
-        results = @reader.extract_lang_json
+        results = @reader.extract_lang_json_and_meta_data
         @progress_bar = JpQuest.create_progress_bar(file_path, results.length)
 
         if need_translation?(results)
