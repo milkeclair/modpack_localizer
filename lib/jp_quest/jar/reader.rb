@@ -14,12 +14,12 @@ module JpQuest
         Zip::File.open(@file_path) do |jar|
           # 対象の言語ファイルが存在する場合は翻訳が必要ない
           target_lang_file = find_lang_json(jar)
-          return { need_translation: false, file_name: extract_file_name(target_lang_file) } if target_lang_file
+          return build_need_resp(false, nil, target_lang_file, extract_mod_name(target_lang_file)) if target_lang_file
 
           lang_file = find_lang_json(jar, "united states")
           raw_json = JSON.parse(lang_file.get_input_stream.read)
 
-          { need_translation: true, json: except_comment(raw_json), file_name: extract_file_name(lang_file) }
+          build_need_resp(true, except_comment(raw_json), lang_file, extract_mod_name(lang_file))
         end
       end
 
@@ -27,6 +27,15 @@ module JpQuest
         lang_files = opened_jar.glob("**/lang/*.json")
 
         lang_files.find { |entry| target_locale_file?(entry, country_name) }
+      end
+
+      def build_need_resp(need_translation, json, file_name, mod_name)
+        {
+          need_translation: need_translation,
+          json: json,
+          file_name: file_name,
+          mod_name: mod_name
+        }
       end
 
       def except_comment(hash)
@@ -42,6 +51,10 @@ module JpQuest
 
       def extract_file_name(file)
         file.name.split("/").last
+      end
+
+      def extract_mod_name(file)
+        file.name.split("/").last(3).first
       end
 
       def get_country_code(country_name)
