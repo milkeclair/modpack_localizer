@@ -26,3 +26,5 @@ gem "rubyzip", "3.0.0.alpha"
 gem "countries", "~> 7.0.0"
 
 gem "json", "~> 2.2"
+
+gem "activesupport", "8.0.0.beta1"

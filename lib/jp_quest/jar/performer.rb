@@ -1,4 +1,5 @@
 require "jp_translator_from_gpt"
+require "active_support/core_ext/string/inflections"
 require_relative "../util/help"
 require_relative "../util/error"
 require_relative "reader"
@@ -35,7 +36,7 @@ module JpQuest
           puts "Completed!"
         else
           @progress_bar.finish
-          puts "#{except_ext(results[:file_name])} file already exists."
+          puts already_has_translated_file_message(results)
         end
       end
 
@@ -65,8 +66,8 @@ module JpQuest
         json
       end
 
-      def except_ext(file_name)
-        file_name.split(".").first
+      def already_has_translated_file_message(results)
+        "#{results[:mod_name].camelize} already has #{@reader.extract_file_name(results[:file_name])} file."
       end
     end
   end
