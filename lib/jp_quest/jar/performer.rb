@@ -26,7 +26,7 @@ module JpQuest
         file_path = File.expand_path(file_path)
         validate_path(file_path)
 
-        @reader, @writer = JpQuest::Jar::Reader.new(file_path, @country_name), JpQuest::Jar::Writer.new(file_path)
+        init_reader_and_writer(file_path)
         results = @reader.extract_lang_json_and_meta_data
         @progress_bar = JpQuest.create_progress_bar(file_path, results.length)
 
@@ -52,6 +52,11 @@ module JpQuest
       def validate_path(path)
         path = File.expand_path(path)
         raise JpQuest::PathNotFoundError.new(path) unless File.exist?(path)
+      end
+
+      def init_reader_and_writer(file_path)
+        @reader = JpQuest::Jar::Reader.new(file_path, @country_name)
+        @writer = JpQuest::Jar::Writer.new(file_path)
       end
 
       def need_translation?(results)
