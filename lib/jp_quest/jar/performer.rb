@@ -2,6 +2,7 @@ require "jp_translator_from_gpt"
 require_relative "../util/help"
 require_relative "../util/error"
 require_relative "reader"
+require_relative "writer"
 
 module JpQuest
   module Jar
@@ -34,7 +35,7 @@ module JpQuest
           puts "Completed!"
         else
           @progress_bar.finish
-          puts "No translation required"
+          puts "#{except_ext(results[:file_name])} file already exists."
         end
       end
 
@@ -62,6 +63,10 @@ module JpQuest
           @progress_bar.increment
         end
         json
+      end
+
+      def except_ext(file_name)
+        file_name.split(".").first
       end
     end
   end
