@@ -13,12 +13,13 @@ module JpQuest
       def extract_lang_json
         Zip::File.open(@file_path) do |jar|
           # 対象の言語ファイルが存在する場合は翻訳が必要ない
-          return { need_translation: false } if find_lang_json(jar)
+          target_lang_file = find_lang_json(jar)
+          return { need_translation: false, file_name: extract_file_name(target_lang_file) } if target_lang_file
 
           lang_file = find_lang_json(jar, "united states")
           raw_json = JSON.parse(lang_file.get_input_stream.read)
 
-          { need_translation: true, json: except_comment(raw_json), file_name: lang_file.name }
+          { need_translation: true, json: except_comment(raw_json), file_name: extract_file_name(lang_file) }
         end
       end
 
