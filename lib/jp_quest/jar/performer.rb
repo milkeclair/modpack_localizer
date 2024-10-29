@@ -6,7 +6,7 @@ require_relative "reader"
 require_relative "writer"
 
 module JpQuest
-  module Jar
+  module JAR
     class Performer
       def initialize(
         output_logs: true, except_words: [], language: "japanese", country: "japan", display_help: true
@@ -48,8 +48,8 @@ module JpQuest
       end
 
       def init_reader_and_writer(file_path)
-        @reader = JpQuest::Jar::Reader.new(file_path, @country_name)
-        @writer = JpQuest::Jar::Writer.new(file_path)
+        @reader = JpQuest::JAR::Reader.new(file_path, @country_name)
+        @writer = JpQuest::JAR::Writer.new(file_path)
       end
 
       def init_progress_bar(file_path, length)

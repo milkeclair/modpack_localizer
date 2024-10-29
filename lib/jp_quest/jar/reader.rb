@@ -3,7 +3,7 @@ require "json"
 require "countries"
 
 module JpQuest
-  module Jar
+  module JAR
     class Reader
       def initialize(file_path, country_name)
         @file_path = file_path

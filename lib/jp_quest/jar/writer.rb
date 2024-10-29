@@ -1,5 +1,5 @@
 module JpQuest
-  module Jar
+  module JAR
     class Writer
       def initialize(file_path)
         @file_path = file_path
