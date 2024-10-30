@@ -5,7 +5,9 @@ require "countries"
 module JpQuest
   module JAR
     class Reader
-      def initialize(file_path, country_name)
+      LangData = Struct.new(:need_translation, :json, :file_name, :mod_name)
+
+      def initialize(file_path, language, country_name)
         @file_path = file_path
         @country_name = country_name
       end
@@ -14,12 +16,12 @@ module JpQuest
         Zip::File.open(@file_path) do |jar|
           # 対象の言語ファイルが存在する場合は翻訳が必要ない
           target_lang_file = find_lang_json(jar)
-          return build_need_resp(false, nil, target_lang_file, extract_mod_name(target_lang_file)) if target_lang_file
+          return LangData.new(false, {}, target_lang_file, extract_mod_name(target_lang_file)) if target_lang_file
 
           lang_file = find_lang_json(jar, "united states")
           raw_json = JSON.parse(lang_file.get_input_stream.read)
 
-          build_need_resp(true, except_comment(raw_json), lang_file, extract_mod_name(lang_file))
+          LangData.new(true, except_comment(raw_json), lang_file, extract_mod_name(lang_file))
         end
       end
 
