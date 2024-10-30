@@ -16,6 +16,7 @@ module JpQuest
           except_words: except_words,
           exchange_language: language
         )
+        @language = language
         @country_name = country
         @reader, @writer, @progress_bar = nil
 
@@ -48,8 +49,8 @@ module JpQuest
       end
 
       def init_reader_and_writer(file_path)
-        @reader = JpQuest::JAR::Reader.new(file_path, @country_name)
-        @writer = JpQuest::JAR::Writer.new(file_path)
+        @reader = JpQuest::JAR::Reader.new(file_path, @language, @country_name)
+        @writer = JpQuest::JAR::Writer.new
       end
 
       def init_progress_bar(file_path, length)

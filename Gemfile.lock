@@ -30,6 +30,7 @@ GEM
     connection_pool (2.4.1)
     countries (7.0.0)
       unaccent (~> 0.3)
+    csv (3.3.0)
     diff-lcs (1.5.1)
     dotenv (3.1.4)
     drb (2.2.1)
@@ -44,6 +45,8 @@ GEM
       net-http
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
+    iso-639 (0.3.8)
+      csv
     jp_translator_from_gpt (1.1.0)
       dotenv (~> 3.1.4)
       ruby-openai (~> 7.1.0)
@@ -112,6 +115,7 @@ PLATFORMS
 DEPENDENCIES
   activesupport (= 8.0.0.beta1)
   countries (~> 7.0.0)
+  iso-639 (~> 0.3.8)
   jp_quest!
   jp_translator_from_gpt (~> 1.1.0)
   json (~> 2.2)
