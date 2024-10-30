@@ -15,7 +15,7 @@ module JpQuest
   # quests以下のファイルを全て翻訳する
   #
   # @return [void]
-  def self.omakase(lang: "japanese", country: "japan")
+  def self.omakase(lang: "Japanese", country: "Japan")
     performers = []
     performers << JpQuest::SNBT::Performer.new(language: lang)
     performers << JpQuest::JAR::Performer.new(language: lang, country: country)

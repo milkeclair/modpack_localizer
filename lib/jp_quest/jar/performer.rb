@@ -9,7 +9,7 @@ module JpQuest
   module JAR
     class Performer
       def initialize(
-        output_logs: true, except_words: [], language: "japanese", country: "japan", display_help: true
+        output_logs: true, except_words: [], language: "Japanese", country: "Japan", display_help: true
       )
         @translator = JpTranslatorFromGpt::Translator.new(
           output_logs: output_logs,
