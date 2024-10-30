@@ -30,7 +30,7 @@ module JpQuest
         results = @reader.extract_lang_json_and_meta_data
         init_progress_bar(file_path, results[:json].length)
 
-        if need_translation?(results) ? translate(results) : feedback_unnecessary_translation(results)
+        need_translation?(results) ? translate(results) : feedback_unnecessary_translation(results)
       end
 
       def perform_directory(dir_path: "mods")
