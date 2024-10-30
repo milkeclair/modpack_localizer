@@ -16,8 +16,7 @@ module JpQuest
   #
   # @return [void]
   def self.omakase(lang: "Japanese", country: "Japan")
-    performers = []
-    performers << JpQuest::SNBT::Performer.new(language: lang)
+    performers = [] << JpQuest::SNBT::Performer.new(language: lang)
     performers << JpQuest::JAR::Performer.new(language: lang, country: country)
     performers.each(&:perform_directory)
   end
