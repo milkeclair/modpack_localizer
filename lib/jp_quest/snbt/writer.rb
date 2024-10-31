@@ -4,7 +4,7 @@ require_relative "formatter"
 
 module JpQuest
   module SNBT
-    # 翻訳された内容を整形して出力するクラス
+    # .snbtファイルの翻訳された内容を整形して出力するクラス
     class Writer
       include IndentHelper
 

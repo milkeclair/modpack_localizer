@@ -6,12 +6,12 @@ require_relative "writer"
 
 module JpQuest
   module SNBT
-    # 翻訳を実行するクラス
+    # .snbtの翻訳を実行するクラス
     # JpTranslatorFromGptを使用して翻訳を行う
     class Performer
-      # @param [Boolean] output_logs ログを出力するか
+      # @param [Boolean] output_logs APIのログを出力するか
       # @param [Array<String>] except_words 翻訳しない単語
-      # @param [String] language どの言語に翻訳するか
+      # @param [String] language 言語
       # @param [Boolean] display_help ヘルプを表示するか
       # @return [JpQuest::SNBT::Performer]
       def initialize(output_logs: true, except_words: [], language: "Japanese", display_help: true)
@@ -25,9 +25,10 @@ module JpQuest
         JpQuest.help if display_help
       end
 
-      # ファイルを翻訳して出力する
+      # .snbtファイルを翻訳して出力する
       #
       # @param [String] file_path ファイルのパス
+      # @param [Boolean] loggable 翻訳ログを出力するか
       # @return [void]
       def perform(file_path, loggable: true)
         @loggable = loggable
@@ -47,9 +48,10 @@ module JpQuest
         puts "Quest translation completed!"
       end
 
-      # ディレクトリ内のファイルを翻訳して出力する
+      # ディレクトリ内の.snbtファイルを翻訳して出力する
       #
       # @param [String] dir_path ディレクトリのパス
+      # @param [Boolean] loggable 翻訳ログを出力するか
       # @return [void]
       def perform_directory(dir_path: "quests", loggable: true)
         puts "Performing directory: #{dir_path}" unless loggable
@@ -66,8 +68,7 @@ module JpQuest
         snbt_files.each { |file_path| perform(file_path, loggable: loggable) }
       end
 
-      # ファイルの存在を確認する
-      # 存在しない場合はPathNotFoundErrorを投げる
+      # ファイルの存在性のバリデーション
       #
       # @param [String] path ファイルのパス
       # @return [void]

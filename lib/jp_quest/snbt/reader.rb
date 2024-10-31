@@ -7,7 +7,7 @@ require_relative "description_extractor"
 
 module JpQuest
   module SNBT
-    # SNBT形式のファイルからタイトル、サブタイトル、説明を抽出するクラス
+    # .snbtファイルからタイトル、サブタイトル、説明を抽出するクラス
     class Reader
       include TitleExtractor
       include SubtitleExtractor
