@@ -9,9 +9,7 @@ module JpQuest
       LangData = Struct.new(:need_translation, :json, :file_name, :region_code, :mod_name)
 
       def initialize(file_path, language, country_name)
-        @file_path = file_path
-        @language = language
-        @country_name = country_name
+        @file_path, @language, @country_name = file_path, language, country_name
       end
 
       def extract_lang_json_and_meta_data
