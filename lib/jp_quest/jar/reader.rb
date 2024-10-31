@@ -63,16 +63,17 @@ module JpQuest
       end
 
       def get_language_code(language_name)
-        # find_by_english_nameがcase sensitiveの可能性があるので念のため
-        language_name = language_name.split.map(&:capitalize).join(" ")
-        result = ISO_639.find_by_english_name(language_name)
+        result = ISO_639.find_by_english_name(optimize(language_name))
         result.alpha2 || result.alpha3
       end
 
       def get_country_code(country_name)
-        # find_country_by_any_nameがcase sensitiveの可能性があるので念のため
-        country_name = country_name.split.map(&:capitalize).join(" ")
-        ISO3166::Country.find_country_by_any_name(country_name)&.alpha2&.downcase
+        ISO3166::Country.find_country_by_any_name(optimize(country_name))&.alpha2&.downcase
+      end
+
+      def optimize(str)
+        # ISO関連のgemが受け付けられる形式に変換
+        str.gsub("_", " ").split.map(&:capitalize).join(" ")
       end
     end
   end
