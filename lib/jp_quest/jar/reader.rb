@@ -71,11 +71,12 @@ module JpQuest
 
       def get_language_code(language_name)
         result = ISO_639.find_by_english_name(optimize(language_name))
-        result.alpha2 || result.alpha3
+        result&.alpha2&.downcase || result&.alpha3&.downcase
       end
 
       def get_country_code(country_name)
-        ISO3166::Country.find_country_by_any_name(optimize(country_name))&.alpha2&.downcase
+        result = ISO3166::Country.find_country_by_any_name(optimize(country_name))
+        result&.alpha2&.downcase || result&.alpha3&.downcase
       end
 
       def optimize(str)
