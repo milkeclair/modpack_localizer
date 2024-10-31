@@ -9,7 +9,8 @@ module JpQuest
   module JAR
     class Performer
       def initialize(
-        output_logs: true, except_words: [], language: "Japanese", country: "Japan", display_help: true
+        output_logs: true, except_words: [], language: "Japanese",
+        country: "Japan", region_code: nil, display_help: true
       )
         @translator = JpTranslatorFromGpt::Translator.new(
           output_logs: output_logs,
@@ -18,6 +19,7 @@ module JpQuest
         )
         @language = language
         @country_name = country
+        @region_code = region_code
         @reader, @writer, @progress_bar = nil
 
         JpQuest.help if display_help
@@ -49,7 +51,7 @@ module JpQuest
       end
 
       def init_reader_and_writer(file_path)
-        @reader = JpQuest::JAR::Reader.new(file_path, @language, @country_name)
+        @reader = JpQuest::JAR::Reader.new(file_path, @language, @country_name, @region_code)
         @writer = JpQuest::JAR::Writer.new
       end
 

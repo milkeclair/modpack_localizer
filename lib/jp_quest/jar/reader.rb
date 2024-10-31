@@ -8,15 +8,16 @@ module JpQuest
     class Reader
       LangData = Struct.new(:need_translation, :json, :file_name, :region_code, :mod_name)
 
-      def initialize(file_path, language, country_name)
+      def initialize(file_path, language, country_name, region_code)
         @file_path, @language, @country_name = file_path, language, country_name
+        @region_code =
+          region_code || make_region_code(get_language_code(language), get_country_code(country_name))
       end
 
       def extract_lang_json_and_meta_data
         Zip::File.open(@file_path) do |jar|
-          region_code = make_region_code(get_language_code(@language), get_country_code(@country_name))
           # 対象の言語ファイルが存在する場合は翻訳が必要ない
-          target_lang_file = find_lang_json(jar, region_code)
+          target_lang_file = find_lang_json(jar, @region_code)
           if target_lang_file
             return LangData.new(
               false, {}, target_lang_file, nil, extract_mod_name(target_lang_file)
@@ -27,7 +28,7 @@ module JpQuest
           raw_json = JSON.parse(lang_file.get_input_stream.read)
 
           LangData.new(
-            true, except_comment(raw_json), lang_file, region_code, extract_mod_name(lang_file)
+            true, except_comment(raw_json), lang_file, @region_code, extract_mod_name(lang_file)
           )
         end
       end
