@@ -57,9 +57,13 @@ module JpQuest
         validate_path(dir_path)
 
         # **でサブディレクトリも含めて取得
-        Dir.glob("#{dir_path}/**/*.snbt").each do |file_path|
-          perform(file_path, loggable: loggable)
+        snbt_files = Dir.glob("#{dir_path}/**/*.snbt")
+        if snbt_files.empty?
+          puts "SNBT files not found in: #{dir_path}"
+          return
         end
+
+        snbt_files.each { |file_path| perform(file_path, loggable: loggable) }
       end
 
       # ファイルの存在を確認する

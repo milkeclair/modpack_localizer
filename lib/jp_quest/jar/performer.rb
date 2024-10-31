@@ -40,9 +40,13 @@ module JpQuest
         dir_path = File.expand_path(dir_path)
         validate_path(dir_path)
 
-        Dir.glob("#{dir_path}/*.jar").each do |file_path|
-          perform(file_path, loggable: loggable)
+        jar_files = Dir.glob("#{dir_path}/*.jar")
+        if jar_files.empty?
+          puts "JAR files not found in: #{dir_path}"
+          return
         end
+
+        jar_files.each { |file_path| perform(file_path, loggable: loggable) }
       end
 
       def validate_path(path)
