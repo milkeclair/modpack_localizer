@@ -13,7 +13,9 @@ module JpQuest
         @file_path, @language, @country_name = file_path, language, country_name
         @region_code =
           region_code&.downcase || make_region_code(get_language_code(language), get_country_code(country_name))
-        validate_region_code(@region_code)
+        # 引数としてregion_codeが渡された時はチェックしない
+        # brb(Netherlands)のような、正規表現にマッチしないregion_codeが存在するため(brbはISO 639-3でqbr_NL)
+        validate_region_code(@region_code) unless region_code
       end
 
       def extract_lang_json_and_meta_data
