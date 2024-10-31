@@ -17,9 +17,7 @@ module JpQuest
           except_words: except_words,
           exchange_language: language
         )
-        @language = language
-        @country_name = country
-        @region_code = region_code
+        @language, @country_name, @region_code = language, country, region_code
         @reader, @writer, @progress_bar = nil
 
         JpQuest.help if display_help
@@ -65,7 +63,7 @@ module JpQuest
 
       def translate(lang_data)
         lang_data.json.each do |key, value|
-          #lang_data.json[key] = @translator.translate(value)
+          # lang_data.json[key] = @translator.translate(value)
           @progress_bar.increment
         end
 
