@@ -32,4 +32,16 @@ module JpQuest
       super(format(INVALID_LINE_COUNT, "Expected: #{expect_count}, Actual: #{actual_count}"))
     end
   end
+
+  class InvalidRegionCodeError < Error
+    INVALID_REGION_CODE = <<~TEXT.freeze
+      \n
+      %s is an invalid region code.
+      Please specify a valid language or country or region code.
+    TEXT
+
+    def initialize(region_code)
+      super(format(INVALID_REGION_CODE, region_code))
+    end
+  end
 end

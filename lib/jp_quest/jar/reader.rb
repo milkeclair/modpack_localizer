@@ -6,12 +6,14 @@ require "iso-639"
 module JpQuest
   module JAR
     class Reader
+      REGION_CODE_REGEX = /\A[a-z]{2,3}_[a-z]{2,3}\z/
       LangData = Struct.new(:need_translation, :json, :file_name, :region_code, :mod_name)
 
       def initialize(file_path, language, country_name, region_code)
         @file_path, @language, @country_name = file_path, language, country_name
         @region_code =
-          region_code || make_region_code(get_language_code(language), get_country_code(country_name))
+          region_code&.downcase || make_region_code(get_language_code(language), get_country_code(country_name))
+        validate_region_code(@region_code)
       end
 
       def extract_lang_json_and_meta_data
@@ -31,6 +33,12 @@ module JpQuest
             true, except_comment(raw_json), lang_file, @region_code, extract_mod_name(lang_file)
           )
         end
+      end
+
+      def validate_region_code(region_code)
+        return if region_code.match(REGION_CODE_REGEX)
+
+        raise JpQuest::InvalidRegionCodeError.new(region_code)
       end
 
       def find_lang_json(opened_jar, region_code)
