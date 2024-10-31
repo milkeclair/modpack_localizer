@@ -18,28 +18,30 @@ module JpQuest
           exchange_language: language
         )
         @language, @country_name, @region_code = language, country, region_code
-        @reader, @writer, @progress_bar = nil
+        @reader, @writer, @progress_bar, @loggable = nil
 
         JpQuest.help if display_help
       end
 
-      def perform(file_path)
+      def perform(file_path, loggable: true)
+        @loggable = loggable
         file_path = File.expand_path(file_path)
         validate_path(file_path)
 
         init_reader_and_writer(file_path)
         lang_data = @reader.extract_lang_json_and_meta_data
-        init_progress_bar(file_path, lang_data.json.length)
+        init_progress_bar(file_path, lang_data.json.length) if @loggable
 
         need_translation?(lang_data) ? translate(lang_data) : feedback_unnecessary_translation(lang_data)
       end
 
-      def perform_directory(dir_path: "mods")
+      def perform_directory(dir_path: "mods", loggable: true)
+        puts "Performing directory: #{dir_path}" unless loggable
         dir_path = File.expand_path(dir_path)
         validate_path(dir_path)
 
         Dir.glob("#{dir_path}/*.jar").each do |file_path|
-          perform(file_path)
+          perform(file_path, loggable: loggable)
         end
       end
 
@@ -64,7 +66,7 @@ module JpQuest
       def translate(lang_data)
         lang_data.json.each do |key, value|
           # lang_data.json[key] = @translator.translate(value)
-          @progress_bar.increment
+          @progress_bar.increment if @loggable
         end
 
         @writer.make_resource_pack(lang_data)
@@ -72,7 +74,7 @@ module JpQuest
       end
 
       def feedback_unnecessary_translation(lang_data)
-        @progress_bar.finish
+        @progress_bar.finish if @loggable
         puts already_has_translated_file_message(lang_data)
       end
 

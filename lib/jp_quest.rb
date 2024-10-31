@@ -15,10 +15,16 @@ module JpQuest
   # quests以下のファイルを全て翻訳する
   #
   # @return [void]
-  def self.omakase(lang: "Japanese", country: "Japan")
-    performers = [] << JpQuest::SNBT::Performer.new(language: lang)
-    performers << JpQuest::JAR::Performer.new(language: lang, country: country)
-    performers.each(&:perform_directory)
+  def self.omakase(language: "Japanese", country: "Japan", region_code: nil, threadable: false)
+    performers = [] << JpQuest::SNBT::Performer.new(language: language)
+    performers << JpQuest::JAR::Performer.new(language: language, country: country, region_code: region_code, display_help: false)
+
+    if threadable
+      threads = performers.map { |pfm| Thread.new { pfm.perform_directory(loggable: false) } }
+      threads.each(&:join)
+    else
+      performers.each(&:perform_directory)
+    end
   end
 
   # JpQuest gemについてのヘルプを表示する

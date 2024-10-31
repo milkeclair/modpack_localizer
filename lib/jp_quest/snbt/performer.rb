@@ -20,9 +20,7 @@ module JpQuest
           except_words: except_words,
           exchange_language: language
         )
-        @reader = nil
-        @writer = nil
-        @progress_bar = nil
+        @reader, @writer, @progress_bar, @loggable = nil
 
         JpQuest.help if display_help
       end
@@ -31,18 +29,19 @@ module JpQuest
       #
       # @param [String] file_path ファイルのパス
       # @return [void]
-      def perform(file_path)
+      def perform(file_path, loggable: true)
+        @loggable = loggable
         file_path = File.expand_path(file_path)
         validate_path(file_path)
 
         @reader, @writer = JpQuest::SNBT::Reader.new(file_path), JpQuest::SNBT::Writer.new(file_path)
         results = @reader.extract_all.flatten
-        @progress_bar = JpQuest.create_progress_bar(file_path, results.length)
+        @progress_bar = JpQuest.create_progress_bar(file_path, results.length) if @loggable
 
         results.each do |result|
           result[:text] = @translator.translate(result[:text])
           @writer.overwrites(result)
-          @progress_bar.increment
+          @progress_bar.increment if @loggable
         end
 
         puts "Completed!"
@@ -52,13 +51,14 @@ module JpQuest
       #
       # @param [String] dir_path ディレクトリのパス
       # @return [void]
-      def perform_directory(dir_path: "quests")
+      def perform_directory(dir_path: "quests", loggable: true)
+        puts "Performing directory: #{dir_path}" unless loggable
         dir_path = File.expand_path(dir_path)
         validate_path(dir_path)
 
         # **でサブディレクトリも含めて取得
         Dir.glob("#{dir_path}/**/*.snbt").each do |file_path|
-          perform(file_path)
+          perform(file_path, loggable: loggable)
         end
       end
 
