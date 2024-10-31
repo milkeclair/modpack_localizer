@@ -44,7 +44,7 @@ module JpQuest
           @progress_bar.increment if @loggable
         end
 
-        puts "Completed!"
+        puts "Quest translation completed!"
       end
 
       # ディレクトリ内のファイルを翻訳して出力する

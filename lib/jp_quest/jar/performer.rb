@@ -70,11 +70,13 @@ module JpQuest
         end
 
         @writer.make_resource_pack(lang_data)
-        puts "Completed!"
+        puts "Mod translation completed!"
       end
 
       def feedback_unnecessary_translation(lang_data)
-        @progress_bar.finish if @loggable
+        return unless @loggable
+
+        @progress_bar.finish
         puts already_has_translated_file_message(lang_data)
       end
 
