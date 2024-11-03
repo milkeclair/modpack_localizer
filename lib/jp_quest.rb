@@ -13,16 +13,16 @@ require_relative "jp_quest/jar/performer"
 # - description
 module JpQuest
   # quests, mods配下のファイルを全て翻訳する
-  # region_codeを指定する場合、countryの指定は不要
+  # locale_codeを指定する場合、countryの指定は不要
   #
   # @param [String] language 言語
   # @param [String] country 国
-  # @param [String] region_code 地域コード(例: "ja_jp")
+  # @param [String] locale_code ロケールコード(例: "ja_jp")
   # @param [Boolean] threadable quests, modsの翻訳を並列で行うか
   # @return [void]
-  def self.omakase(language: "Japanese", country: "Japan", region_code: nil, threadable: false)
+  def self.omakase(language: "Japanese", country: "Japan", locale_code: nil, threadable: false)
     performers = [] << JpQuest::SNBT::Performer.new(language: language)
-    performers << JpQuest::JAR::Performer.new(language: language, country: country, region_code: region_code, display_help: false)
+    performers << JpQuest::JAR::Performer.new(language: language, country: country, locale_code: locale_code, display_help: false)
 
     if threadable
       threads = performers.map { |pfm| Thread.new { pfm.perform_directory(loggable: false) } }

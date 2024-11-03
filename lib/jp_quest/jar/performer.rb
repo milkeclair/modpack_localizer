@@ -10,25 +10,25 @@ module JpQuest
     # .jarの翻訳を実行するクラス
     # JpTranslatorFromGptを使用して翻訳を行う
     class Performer
-      # region_codeを指定する場合、countryの指定は不要
+      # locale_codeを指定する場合、countryの指定は不要
       #
       # @param [Boolean] output_logs APIのログを出力するか
       # @param [Array<String>] except_words 翻訳しない単語
       # @param [String] language 言語
       # @param [String] country 国
-      # @param [String] region_code 地域コード (例: "ja_jp")
+      # @param [String] locale_code ロケールコード (例: "ja_jp")
       # @param [Boolean] display_help ヘルプを表示するか
       # @return [JpQuest::JAR::Performer]
       def initialize(
         output_logs: true, except_words: [], language: "Japanese",
-        country: "Japan", region_code: nil, display_help: true
+        country: "Japan", locale_code: nil, display_help: true
       )
         @translator = JpTranslatorFromGpt::Translator.new(
           output_logs: output_logs,
           except_words: except_words,
           exchange_language: language
         )
-        @language, @country_name, @region_code = language, country, region_code
+        @language, @country_name, @locale_code = language, country, locale_code
         @reader, @writer, @progress_bar, @loggable = nil
 
         JpQuest.help if display_help
@@ -86,7 +86,7 @@ module JpQuest
       # @params [String] file_path ファイルのパス
       # @return [void]
       def init_reader_and_writer(file_path)
-        @reader = JpQuest::JAR::Reader.new(file_path, @language, @country_name, @region_code)
+        @reader = JpQuest::JAR::Reader.new(file_path, @language, @country_name, @locale_code)
         @writer = JpQuest::JAR::Writer.new
       end
 

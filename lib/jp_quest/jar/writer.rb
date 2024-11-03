@@ -7,7 +7,7 @@ module JpQuest
       end
 
       def make_resource_pack(results)
-        results.file_name = results.file_name.name.gsub("en_us", results.region_code)
+        results.file_name = results.file_name.name.gsub("en_us", results.locale_code)
         @output_path = "#{@output_path_base}/#{results.file_name}"
         puts @output_path
       end

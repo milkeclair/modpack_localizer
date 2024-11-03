@@ -34,14 +34,14 @@ module JpQuest
   end
 
   class InvalidRegionCodeError < Error
-    INVALID_REGION_CODE = <<~TEXT.freeze
+    INVALID_LOCALE_CODE = <<~TEXT.freeze
       \n
       %s is an invalid region code.
       Please specify a valid language or country or region code.
     TEXT
 
-    def initialize(region_code)
-      super(format(INVALID_REGION_CODE, region_code))
+    def initialize(locale_code)
+      super(format(INVALID_LOCALE_CODE, locale_code))
     end
   end
 end

@@ -8,33 +8,33 @@ module JpQuest
     # .jarファイルから言語ファイルの内容とメタデータを抽出するクラス
     class Reader
       # 例: ja_jp
-      REGION_CODE_REGEX = /\A[a-z]{2,3}_[a-z]{2,3}\z/
-      LangData = Struct.new(:need_translation, :json, :file_name, :region_code, :mod_name)
+      LOCALE_CODE_REGEX = /\A[a-z]{2,3}_[a-z]{2,3}\z/
+      LangData = Struct.new(:need_translation, :json, :file_name, :locale_code, :mod_name)
 
-      # region_codeが渡された場合、languageとcountry_nameは不要
+      # locale_codeが渡された場合、languageとcountry_nameは不要
       #
       # @param [String] file_path ファイルのパス
       # @param [String] language 言語
       # @param [String] country_name 国
-      # @param [String] region_code 地域コード
+      # @param [String] locale_code ロケールコード
       # @return [JpQuest::JAR::Reader]
-      def initialize(file_path, language, country_name, region_code)
+      def initialize(file_path, language, country_name, locale_code)
         @file_path, @language, @country_name = file_path, language, country_name
-        @region_code =
-          region_code&.downcase || make_region_code(get_language_code(language), get_country_code(country_name))
-        # 引数としてregion_codeが渡された時はチェックしない
-        # brb(Netherlands)のような、正規表現にマッチしないregion_codeが存在するため(brbはISO 639-3でqbr_NL)
-        validate_region_code(@region_code) unless region_code
+        @locale_code =
+          locale_code&.downcase || make_locale_code(get_language_code(language), get_country_code(country_name))
+        # 引数としてlocale_codeが渡された時はチェックしない
+        # brb(Netherlands)のような、正規表現にマッチしないlocale_codeが存在するため(brbはISO 639-3でqbr_NL)
+        validate_locale_code(@locale_code) unless locale_code
       end
 
       # 言語ファイルの内容とメタデータを抽出する
       #
       # @return [LangData] 言語ファイルの内容とメタデータ
-      # @raise [JpQuest::InvalidRegionCodeError] region_codeが不正な場合
+      # @raise [JpQuest::InvalidRegionCodeError] locale_codeが不正な場合
       def extract_lang_json_and_meta_data
         Zip::File.open(@file_path) do |jar|
           # 対象の言語ファイルが存在する場合は翻訳が必要ない
-          target_lang_file = find_lang_json(jar, @region_code)
+          target_lang_file = find_lang_json(jar, @locale_code)
           if target_lang_file
             return LangData.new(
               false, {}, target_lang_file, nil, extract_mod_name(target_lang_file)
@@ -45,32 +45,32 @@ module JpQuest
           raw_json = JSON.parse(lang_file.get_input_stream.read)
 
           LangData.new(
-            true, except_comment(raw_json), lang_file, @region_code, extract_mod_name(lang_file)
+            true, except_comment(raw_json), lang_file, @locale_code, extract_mod_name(lang_file)
           )
         end
       end
 
       private
 
-      # 地域コードのバリデーション
+      # ロケールコードのバリデーション
       #
-      # @param [String] region_code 地域コード
+      # @param [String] locale_code ロケールコード
       # @return [Boolean]
-      def validate_region_code(region_code)
-        return if region_code.match(REGION_CODE_REGEX)
+      def validate_locale_code(locale_code)
+        return if locale_code.match(LOCALE_CODE_REGEX)
 
-        raise JpQuest::InvalidRegionCodeError.new(region_code)
+        raise JpQuest::InvalidRegionCodeError.new(locale_code)
       end
 
       # .jar内の言語ファイルを取得する
       #
       # @param [Zip::File] opened_jar .jarファイル
-      # @param [String] region_code 地域コード
+      # @param [String] locale_code ロケールコード
       # @return [Zip::Entry] 言語ファイル
-      def find_lang_json(opened_jar, region_code)
+      def find_lang_json(opened_jar, locale_code)
         lang_files = opened_jar.glob("**/lang/*.json")
 
-        lang_files.find { |entry| target_locale_file?(entry, region_code) }
+        lang_files.find { |entry| target_locale_file?(entry, locale_code) }
       end
 
       # JSONからコメントを除外する
@@ -84,12 +84,12 @@ module JpQuest
       # 対象の言語ファイルかどうか
       #
       # @param [Zip::Entry] file ファイル
-      # @param [String] region_code 地域コード
+      # @param [String] locale_code ロケールコード
       # @return [Boolean]
-      def target_locale_file?(file, region_code)
+      def target_locale_file?(file, locale_code)
         file_name = extract_file_name(file)
 
-        file_name.include?("#{region_code}.json")
+        file_name.include?("#{locale_code}.json")
       end
 
       # フルパスからファイル名を抽出する
@@ -108,12 +108,12 @@ module JpQuest
         file.name.split("/").last(3).first
       end
 
-      # 地域コードを生成する
+      # ロケールコードを生成する
       #
       # @param [String] lang_code 言語コード
       # @param [String] country_code 国コード
-      # @return [String] 地域コード
-      def make_region_code(lang_code, country_code)
+      # @return [String] ロケールコード
+      def make_locale_code(lang_code, country_code)
         "#{lang_code}_#{country_code}"
       end
 
