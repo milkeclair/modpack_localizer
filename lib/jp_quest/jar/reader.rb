@@ -9,7 +9,18 @@ module JpQuest
     class Reader
       # 例: ja_jp
       LOCALE_CODE_REGEX = /\A[a-z]{2,3}_[a-z]{2,3}\z/
-      LangData = Struct.new(:need_translation, :json, :file_name, :locale_code, :mod_name)
+
+      # performerに渡すレスポンス
+      #
+      # @param [Boolean] need_translation 翻訳が必要か
+      # @param [Hash] json 言語ファイルの内容
+      # @param [String] file_name ファイル名
+      # @param [String] locale_code ロケールコード
+      # @param [String] mod_name mod名
+      # @return [LangData]
+      LangData = Struct.new(
+        :need_translation, :json, :file_name, :locale_code, :mod_name
+      )
 
       # locale_codeが渡された場合、languageとcountry_nameは不要
       #
