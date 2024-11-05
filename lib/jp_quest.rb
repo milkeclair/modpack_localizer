@@ -22,7 +22,9 @@ module JpQuest
   # @return [void]
   def self.omakase(language: "Japanese", country: "Japan", locale_code: nil, threadable: false)
     performers = [] << JpQuest::SNBT::Performer.new(language: language)
-    performers << JpQuest::JAR::Performer.new(language: language, country: country, locale_code: locale_code, display_help: false)
+    performers << JpQuest::JAR::Performer.new(
+      language: language, country: country, locale_code: locale_code, display_help: false
+    )
 
     if threadable
       threads = performers.map { |pfm| Thread.new { pfm.perform_directory(loggable: false) } }
