@@ -42,6 +42,9 @@ Style/RaiseArgs:
 Style/WhileUntilModifier:
   Enabled: false
 
+Metrics/ParameterLists:
+  Enabled: false
+
 require:
   - rubocop-rake
   - rubocop-rspec
