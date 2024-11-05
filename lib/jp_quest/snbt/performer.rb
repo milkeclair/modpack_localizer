@@ -37,7 +37,7 @@ module JpQuest
 
         @reader, @writer = JpQuest::SNBT::Reader.new(file_path), JpQuest::SNBT::Writer.new(file_path)
         results = @reader.extract_all.flatten
-        @progress_bar = JpQuest.create_progress_bar(file_path, results.length) if @loggable
+        init_progress_bar(file_path, results.length) if @loggable
 
         results.each do |result|
           result[:text] = @translator.translate(result[:text])
@@ -75,6 +75,17 @@ module JpQuest
       def validate_path(path)
         path = File.expand_path(path)
         raise JpQuest::PathNotFoundError.new(path) unless File.exist?(path)
+      end
+
+      private
+
+      # プログレスバーを初期化する
+      #
+      # @param [String] file_path ファイルのパス
+      # @param [Integer] length プログレスバーの長さ
+      # @return [void]
+      def init_progress_bar(file_path, length)
+        @progress_bar = JpQuest.create_progress_bar(file_path, length)
       end
     end
   end
