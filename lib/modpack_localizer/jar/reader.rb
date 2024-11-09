@@ -17,9 +17,10 @@ module ModpackLocalizer
       # @param [String] file_name ファイル名
       # @param [String] locale_code ロケールコード
       # @param [String] mod_name mod名
+      # @param [String] message 表示するメッセージ
       # @return [LangData]
       LangData = Struct.new(
-        :need_translation, :json, :file_name, :locale_code, :mod_name
+        :need_translation, :json, :file_name, :locale_code, :mod_name, :message
       )
 
       # locale_codeが渡された場合、languageとcountry_nameは不要
@@ -48,15 +49,21 @@ module ModpackLocalizer
           target_lang_file = find_lang_json(jar, @locale_code)
           if target_lang_file
             return LangData.new(
-              false, {}, target_lang_file, nil, extract_mod_name(target_lang_file)
+              false, {}, target_lang_file, nil, extract_mod_name(target_lang_file), nil
             )
           end
 
           lang_file = find_lang_json(jar, "en_us")
+          unless lang_file
+            return LangData.new(
+              false, {}, lang_file, nil, nil, "Language files not found from #{extract_file_name(jar)}"
+            )
+          end
+
           raw_json = JSON.parse(lang_file.get_input_stream.read)
 
           LangData.new(
-            true, except_comment(raw_json), lang_file, @locale_code, extract_mod_name(lang_file)
+            true, except_comment(raw_json), lang_file, @locale_code, extract_mod_name(lang_file), nil
           )
         end
       end
