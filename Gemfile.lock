@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    modpack_localizer (0.1.1)
+    modpack_localizer (0.1.2)
       activesupport (= 8.0.0.beta1)
       countries (~> 7.0.0)
       iso-639 (~> 0.3.8)

@@ -132,7 +132,7 @@ module ModpackLocalizer
         return unless @loggable
 
         @progress_bar.finish
-        lang_data.message ? puts(lang_data.message) : already_has_translated_file_message(lang_data)
+        puts lang_data.message || already_has_translated_file_message(lang_data)
       end
 
       # 既に翻訳済みのファイルが存在する旨のメッセージを出力する
