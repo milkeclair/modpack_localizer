@@ -61,6 +61,14 @@ module JpQuest
         end
       end
 
+      # フルパスからファイル名を抽出する
+      #
+      # @param [Zip::Entry] file ファイル
+      # @return [String] ファイル名
+      def extract_file_name(file)
+        file.name.split("/").last
+      end
+
       private
 
       # ロケールコードのバリデーション
@@ -101,14 +109,6 @@ module JpQuest
         file_name = extract_file_name(file)
 
         file_name.include?("#{locale_code}.json")
-      end
-
-      # フルパスからファイル名を抽出する
-      #
-      # @param [Zip::Entry] file ファイル
-      # @return [String] ファイル名
-      def extract_file_name(file)
-        file.name.split("/").last
       end
 
       # フルパスからmod名を抽出する
