@@ -23,7 +23,7 @@ or if no specific configs required
 7. Double click `start.bat` file
 8. Check `output` directory
 
-## Options for odpackLocalizer.omakase method
+## Options for omakase method
 
 #### language
 
