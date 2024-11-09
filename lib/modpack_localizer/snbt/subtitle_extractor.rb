@@ -1,6 +1,6 @@
 require_relative "../util/indent_helper"
 
-module JpQuest
+module ModpackLocalizer
   module SNBT
     # SNBT形式のファイルからsubtitle: "some subtitle"を抽出するモジュール
     module SubtitleExtractor

@@ -2,19 +2,19 @@ require_relative "../util/error"
 require_relative "../util/indent_helper"
 require_relative "formatter"
 
-module JpQuest
+module ModpackLocalizer
   module SNBT
-    # 翻訳された内容を整形して出力するクラス
+    # .snbtファイルの翻訳された内容を整形して出力するクラス
     class Writer
       include IndentHelper
 
       # @param [String] file_path ファイルのパス
-      # @return [JpQuest::SNBT::Writer]
+      # @return [ModpackLocalizer::SNBT::Writer]
       def initialize(file_path)
         @input_file_path = file_path
         # questsとすると、quests.snbtも変換されてしまうので、quests/とする
         @output_file_path = file_path.gsub("quests/", "output/quests/")
-        @formatter = JpQuest::SNBT::Formatter.new
+        @formatter = ModpackLocalizer::SNBT::Formatter.new
       end
 
       # 翻訳された内容でoutput_file_pathを上書きする
@@ -67,7 +67,7 @@ module JpQuest
         after_line_count = File.readlines(output_file_path).length
         return if before_line_count == after_line_count
 
-        raise JpQuest::InvalidLineCountError.new(before_line_count, after_line_count)
+        raise ModpackLocalizer::InvalidLineCountError.new(before_line_count, after_line_count)
       end
     end
   end

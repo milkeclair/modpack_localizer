@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-RSpec.describe JpQuest do
+RSpec.describe ModpackLocalizer do
   it "バージョンが存在すること" do
-    expect(JpQuest::VERSION).not_to be nil
+    expect(ModpackLocalizer::VERSION).not_to be nil
   end
 end

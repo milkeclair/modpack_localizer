@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-# Specify your gem's dependencies in jp_quest.gemspec
+# Specify your gem's dependencies in modpack_localizer.gemspec
 gemspec
 
 gem "rake", "~> 13.0"
@@ -20,3 +20,12 @@ gem "jp_translator_from_gpt", "~> 1.1.0"
 gem "rainbow", "~> 3.1.1"
 
 gem "ruby-progressbar", "~> 1.13.0"
+
+gem "rubyzip", "3.0.0.alpha"
+
+gem "countries", "~> 7.0.0"
+gem "iso-639", "~> 0.3.8"
+
+gem "json", "~> 2.2"
+
+gem "activesupport", "8.0.0.beta1"

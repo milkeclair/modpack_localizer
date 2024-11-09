@@ -1,4 +1,4 @@
-module JpQuest
+module ModpackLocalizer
   # インデントを扱うモジュール
   module IndentHelper
     # インデントを数える

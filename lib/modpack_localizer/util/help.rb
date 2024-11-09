@@ -1,14 +1,14 @@
 require "rainbow"
 
-module JpQuest
-  # JpQuest gemについてのヘルプを表示するクラス
+module ModpackLocalizer
+  # ModpackLocalizer gemについてのヘルプを表示するクラス
   class Help
-    # JpQuest gemについてのヘルプを表示する
+    # ModpackLocalizer gemについてのヘルプを表示する
     #
     # @return [void]
     def self.help
       puts <<~HELP
-        #{cyan("=== JpQuest Help ===================================================================").bold}\n
+        #{cyan("=== ModpackLocalizer Help ==========================================================").bold}\n
         #{help_warning}
         #{help_intro}
         #{help_steps}
@@ -33,13 +33,14 @@ module JpQuest
     def self.help_intro
       <<~INTRO
         #{cyan("Introduction:").bold}
-          Translator for #{green(".snbt")} files.
+          Translator for #{green(".snbt")} and #{green(".jar")} files.
           If you want to translate to other languages than Japanese,
-          please add the #{green("exchange_language")} option during initialization.
+          please add the #{green("language")} option during initialization.
           Example:
-            #{green("JpQuest::SNBT::Performer.new(exchange_language: \"English\")")}
+            #{green("ModpackLocalizer::SNBT::Performer.new(language: \"English\")")}
+            #{green("ModpackLocalizer::JAR::Performer.new(language: \"English\")")}
             or if no specific configs required
-            #{green("JpQuest.omakase(lang: \"English\")")}
+            #{green("ModpackLocalizer.omakase(language: \"English\")")}
       INTRO
     end
 
@@ -53,11 +54,11 @@ module JpQuest
           2. Add #{green("OPENAI_API_KEY=your_api_key")} to .env
           3. Optional: Add #{green("OPENAI_MODEL=some_openai_model")} to .env (default: gpt-4o-mini)
           4. Add "quests" directory to your project
-          5. #{green("gem install jp_quest")} or #{green("gem \"jp_quest\"")}
-          6. Add #{green("require \"jp_quest\"")}
-          7. Add #{green("jp_quest = JpQuest::SNBT::Performer.new")}
-          8. #{green("jp_quest.perform(\"file_path\")")} or
-             #{green("jp_quest.perform_directory(dir_path: \"dir_path\")")}
+          5. #{green("gem install modpack_localizer")} or #{green("gem \"modpack_localizer\"")}
+          6. Add #{green("require \"modpack_localizer\"")}
+          7. Add #{green("modpack_localizer = ModpackLocalizer::SNBT::Performer.new")}
+          8. #{green("modpack_localizer.perform(\"file_path\")")} or
+             #{green("modpack_localizer.perform_directory(dir_path: \"dir_path\")")}
           9. Check "output" directory
       STEPS
     end
@@ -67,6 +68,20 @@ module JpQuest
     # @return [String]
     def self.help_init_options
       <<~OPTIONS
+        #{cyan("ModpackLocalizer.omakase Options:").bold}
+          language:
+            Which language do you want to translate to?
+            (default: Japanese)
+          country:
+            Your country name
+            (default: Japan)
+          locale_code:
+            Which locale code do you want to use?
+            If you specified this, you don't need to specify the country.
+            (default: nil)
+          threadable:
+            Do you want to exec in parallel?
+            (default: false)
         #{cyan("Initialize Options:").bold}
           output_logs:
             Want to output OpenAI usage logs?
@@ -74,12 +89,20 @@ module JpQuest
           except_words:
             Words that you don't want to translate
             (default: empty array)
-          exchange_language:
+          language:
             Which language do you want to translate to?
-            (default: japanese)
+            (default: Japanese)
           display_help:
             Want to display help?
             (default: true)
+        Only for jar performer:
+          country:
+            Your country name
+            (default: Japan)
+          locale_code:
+            Which locale code do you want to use?
+            If you specified this, you don't need to specify the country.
+            (default: nil)
       OPTIONS
     end
 
@@ -89,9 +112,9 @@ module JpQuest
     def self.help_information
       <<~INFORMATION
         #{cyan("Information:").bold}
-          jp_quest:
-            #{link("https://github.com/milkeclair/jp_quest")}
-            current version: #{JpQuest::VERSION}
+          modpack_localizer:
+            #{link("https://github.com/milkeclair/modpack_localizer")}
+            current version: #{ModpackLocalizer::VERSION}
           translator:
             #{link("https://github.com/milkeclair/jp_translator_from_gpt")}
             current version: #{JpTranslatorFromGpt::VERSION}

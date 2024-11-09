@@ -5,9 +5,9 @@ require_relative "title_extractor"
 require_relative "subtitle_extractor"
 require_relative "description_extractor"
 
-module JpQuest
+module ModpackLocalizer
   module SNBT
-    # SNBT形式のファイルからタイトル、サブタイトル、説明を抽出するクラス
+    # .snbtファイルからタイトル、サブタイトル、説明を抽出するクラス
     class Reader
       include TitleExtractor
       include SubtitleExtractor
@@ -17,7 +17,7 @@ module JpQuest
       DESC_END_LENGTH = -2
 
       # @param [String] file_path ファイルのパス
-      # @return [JpQuest::SNBT::Reader]
+      # @return [ModpackLocalizer::SNBT::Reader]
       def initialize(file_path)
         @file_path = file_path
       end

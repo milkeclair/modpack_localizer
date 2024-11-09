@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-require_relative "lib/jp_quest/util/version"
+require_relative "lib/modpack_localizer/util/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "jp_quest"
-  spec.version = JpQuest::VERSION
+  spec.name = "modpack_localizer"
+  spec.version = ModpackLocalizer::VERSION
   spec.authors = ["milkeclair"]
   spec.email = ["milkeclair.noreply@gmail.com"]
 
-  spec.summary = "translate to japanese for ftbquest"
-  spec.description = "ftbquestを日本語化する"
-  spec.homepage = "https://github.com/milkeclair/jp_quest"
+  spec.summary = "localize minecraft modpack"
+  spec.description = "localize minecraft modpack"
+  spec.homepage = "https://github.com/milkeclair/modpack_localizer"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.0.0"
 
@@ -32,9 +32,14 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   # Uncomment to register a new dependency of your gem
+  spec.add_dependency "activesupport", "8.0.0.beta1"
+  spec.add_dependency "countries", "~> 7.0.0"
+  spec.add_dependency "iso-639", "~> 0.3.8"
   spec.add_dependency "jp_translator_from_gpt", "~> 1.1.0"
+  spec.add_dependency "json", "~> 2.2"
   spec.add_dependency "rainbow", "~> 3.1.1"
   spec.add_dependency "ruby-progressbar", "~> 1.13.0"
+  spec.add_dependency "rubyzip", "3.0.0.alpha"
 
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html

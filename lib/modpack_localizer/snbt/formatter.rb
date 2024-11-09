@@ -1,6 +1,6 @@
 require_relative "../util/indent_helper"
 
-module JpQuest
+module ModpackLocalizer
   module SNBT
     # 翻訳された内容をSNBT形式に整形するクラス
     class Formatter
