@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-# Specify your gem's dependencies in jp_quest.gemspec
+# Specify your gem's dependencies in modpack_localizer.gemspec
 gemspec
 
 gem "rake", "~> 13.0"

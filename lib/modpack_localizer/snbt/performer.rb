@@ -4,7 +4,7 @@ require_relative "../util/error"
 require_relative "reader"
 require_relative "writer"
 
-module JpQuest
+module ModpackLocalizer
   module SNBT
     # .snbtの翻訳を実行するクラス
     # JpTranslatorFromGptを使用して翻訳を行う
@@ -13,7 +13,7 @@ module JpQuest
       # @param [Array<String>] except_words 翻訳しない単語
       # @param [String] language 言語
       # @param [Boolean] display_help ヘルプを表示するか
-      # @return [JpQuest::SNBT::Performer]
+      # @return [ModpackLocalizer::SNBT::Performer]
       def initialize(output_logs: true, except_words: [], language: "Japanese", display_help: true)
         @translator = JpTranslatorFromGpt::Translator.new(
           output_logs: output_logs,
@@ -22,7 +22,7 @@ module JpQuest
         )
         @reader, @writer, @progress_bar, @loggable = nil
 
-        JpQuest.help if display_help
+        ModpackLocalizer.help if display_help
       end
 
       # .snbtファイルを翻訳して出力する
@@ -35,7 +35,7 @@ module JpQuest
         file_path = File.expand_path(file_path)
         validate_path(file_path)
 
-        @reader, @writer = JpQuest::SNBT::Reader.new(file_path), JpQuest::SNBT::Writer.new(file_path)
+        @reader, @writer = ModpackLocalizer::SNBT::Reader.new(file_path), ModpackLocalizer::SNBT::Writer.new(file_path)
         results = @reader.extract_all.flatten
         init_progress_bar(file_path, results.length) if @loggable
 
@@ -74,7 +74,7 @@ module JpQuest
       # @return [void]
       def validate_path(path)
         path = File.expand_path(path)
-        raise JpQuest::PathNotFoundError.new(path) unless File.exist?(path)
+        raise ModpackLocalizer::PathNotFoundError.new(path) unless File.exist?(path)
       end
 
       private
@@ -85,7 +85,7 @@ module JpQuest
       # @param [Integer] length プログレスバーの長さ
       # @return [void]
       def init_progress_bar(file_path, length)
-        @progress_bar = JpQuest.create_progress_bar(file_path, length)
+        @progress_bar = ModpackLocalizer.create_progress_bar(file_path, length)
       end
     end
   end

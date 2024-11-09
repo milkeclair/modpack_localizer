@@ -5,7 +5,7 @@ require_relative "../util/error"
 require_relative "reader"
 require_relative "writer"
 
-module JpQuest
+module ModpackLocalizer
   module JAR
     # .jarの翻訳を実行するクラス
     # JpTranslatorFromGptを使用して翻訳を行う
@@ -18,7 +18,7 @@ module JpQuest
       # @param [String] country 国
       # @param [String] locale_code ロケールコード (例: "ja_jp")
       # @param [Boolean] display_help ヘルプを表示するか
-      # @return [JpQuest::JAR::Performer]
+      # @return [ModpackLocalizer::JAR::Performer]
       def initialize(
         output_logs: true, except_words: [], language: "Japanese",
         country: "Japan", locale_code: nil, display_help: true
@@ -31,7 +31,7 @@ module JpQuest
         @language, @country_name, @locale_code = language, country, locale_code
         @reader, @writer, @progress_bar, @loggable, @tierdown = nil
 
-        JpQuest.help if display_help
+        ModpackLocalizer.help if display_help
       end
 
       # .jarファイルを翻訳してリソースパックを作成する
@@ -78,7 +78,7 @@ module JpQuest
       # @return [void]
       def validate_path(path)
         path = File.expand_path(path)
-        raise JpQuest::PathNotFoundError.new(path) unless File.exist?(path)
+        raise ModpackLocalizer::PathNotFoundError.new(path) unless File.exist?(path)
       end
 
       private
@@ -88,8 +88,8 @@ module JpQuest
       # @params [String] file_path ファイルのパス
       # @return [void]
       def init_reader_and_writer(file_path)
-        @reader = JpQuest::JAR::Reader.new(file_path, @language, @country_name, @locale_code)
-        @writer = JpQuest::JAR::Writer.new
+        @reader = ModpackLocalizer::JAR::Reader.new(file_path, @language, @country_name, @locale_code)
+        @writer = ModpackLocalizer::JAR::Writer.new
       end
 
       # プログレスバーを初期化する
@@ -98,7 +98,7 @@ module JpQuest
       # @param [Integer] length プログレスバーの長さ
       # @return [void]
       def init_progress_bar(file_path, length)
-        @progress_bar = JpQuest.create_progress_bar(file_path, length)
+        @progress_bar = ModpackLocalizer.create_progress_bar(file_path, length)
       end
 
       # 翻訳が必要か判定する

@@ -1,19 +1,19 @@
-## JpQuest
+## ModpackLocalizer
 
 Translator for FTBQuest. (title, subtitle, description)  
 If you want to translate to other languages than Japanese,  
 please add the `language` option during initialization.  
-Can always get help with `JpQuest.help`
+Can always get help with `ModpackLocalizer.help`
 
 #### Example
 
-`JpQuest::SNBT::Performer.new(language: "English")`  
+`ModpackLocalizer::SNBT::Performer.new(language: "English")`  
 or if no specific configs required  
-`JpQuest.omakase(language: "English")`
+`ModpackLocalizer.omakase(language: "English")`
 
 ## Steps
 
-1. Download [release](https://github.com/milkeclair/jp_quest/releases)
+1. Download [release](https://github.com/milkeclair/modpack_localizer/releases)
 2. Make `.env` file
 3. Add `OPENAI_API_KEY=your_api_key` to `.env`
 4. Optional: Add `OPENAI_MODEL=some_openai_model` to `.env` **(default: gpt-4o-mini)**

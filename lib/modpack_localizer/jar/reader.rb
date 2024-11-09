@@ -3,7 +3,7 @@ require "json"
 require "countries"
 require "iso-639"
 
-module JpQuest
+module ModpackLocalizer
   module JAR
     # .jarファイルから言語ファイルの内容とメタデータを抽出するクラス
     class Reader
@@ -28,7 +28,7 @@ module JpQuest
       # @param [String] language 言語
       # @param [String] country_name 国
       # @param [String] locale_code ロケールコード
-      # @return [JpQuest::JAR::Reader]
+      # @return [ModpackLocalizer::JAR::Reader]
       def initialize(file_path, language, country_name, locale_code)
         @file_path, @language, @country_name = file_path, language, country_name
         @locale_code =
@@ -41,7 +41,7 @@ module JpQuest
       # 言語ファイルの内容とメタデータを抽出する
       #
       # @return [LangData] 言語ファイルの内容とメタデータ
-      # @raise [JpQuest::InvalidRegionCodeError] locale_codeが不正な場合
+      # @raise [ModpackLocalizer::InvalidRegionCodeError] locale_codeが不正な場合
       def extract_lang_json_and_meta_data
         Zip::File.open(@file_path) do |jar|
           # 対象の言語ファイルが存在する場合は翻訳が必要ない
@@ -78,7 +78,7 @@ module JpQuest
       def validate_locale_code(locale_code)
         return if locale_code.match(LOCALE_CODE_REGEX)
 
-        raise JpQuest::InvalidRegionCodeError.new(locale_code)
+        raise ModpackLocalizer::InvalidRegionCodeError.new(locale_code)
       end
 
       # .jar内の言語ファイルを取得する

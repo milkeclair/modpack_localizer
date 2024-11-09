@@ -1,21 +1,21 @@
 require "zip"
 
-module JpQuest
+module ModpackLocalizer
   module JAR
     # .jarファイルを翻訳してリソースパックを作成するクラス
     class Writer
       # 1.19.2
       PACK_FORMAT = 9
 
-      # @return [JpQuest::JAR::Writer]
+      # @return [ModpackLocalizer::JAR::Writer]
       def initialize
-        @output_path_base = "output/mods/jpQuest"
+        @output_path_base = "output/mods/modpack_localizer"
         @output_path = nil
       end
 
       # リソースパックを作成する
       #
-      # @param [JpQuest::JAR::Reader::LangData] results 言語ファイルの内容とメタデータ
+      # @param [ModpackLocalizer::JAR::Reader::LangData] results 言語ファイルの内容とメタデータ
       # @return [void]
       def make_resource_pack(results)
         results.file_name = replace_default_locale_code(results.file_name.name, results.locale_code)
@@ -79,7 +79,7 @@ module JpQuest
         meta_data = {
           "pack": {
             "pack_format": pack_format,
-            "description": "Localized for #{locale_code} by jpQuest"
+            "description": "Localized for #{locale_code} by ModpackLocalizer"
           }
         }
 

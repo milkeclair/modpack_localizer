@@ -1,14 +1,14 @@
 require "rainbow"
 
-module JpQuest
-  # JpQuest gemについてのヘルプを表示するクラス
+module ModpackLocalizer
+  # ModpackLocalizer gemについてのヘルプを表示するクラス
   class Help
-    # JpQuest gemについてのヘルプを表示する
+    # ModpackLocalizer gemについてのヘルプを表示する
     #
     # @return [void]
     def self.help
       puts <<~HELP
-        #{cyan("=== JpQuest Help ===================================================================").bold}\n
+        #{cyan("=== ModpackLocalizer Help ==========================================================").bold}\n
         #{help_warning}
         #{help_intro}
         #{help_steps}
@@ -37,9 +37,9 @@ module JpQuest
           If you want to translate to other languages than Japanese,
           please add the #{green("language")} option during initialization.
           Example:
-            #{green("JpQuest::SNBT::Performer.new(language: \"English\")")}
+            #{green("ModpackLocalizer::SNBT::Performer.new(language: \"English\")")}
             or if no specific configs required
-            #{green("JpQuest.omakase(language: \"English\")")}
+            #{green("ModpackLocalizer.omakase(language: \"English\")")}
       INTRO
     end
 
@@ -53,11 +53,11 @@ module JpQuest
           2. Add #{green("OPENAI_API_KEY=your_api_key")} to .env
           3. Optional: Add #{green("OPENAI_MODEL=some_openai_model")} to .env (default: gpt-4o-mini)
           4. Add "quests" directory to your project
-          5. #{green("gem install jp_quest")} or #{green("gem \"jp_quest\"")}
-          6. Add #{green("require \"jp_quest\"")}
-          7. Add #{green("jp_quest = JpQuest::SNBT::Performer.new")}
-          8. #{green("jp_quest.perform(\"file_path\")")} or
-             #{green("jp_quest.perform_directory(dir_path: \"dir_path\")")}
+          5. #{green("gem install modpack_localizer")} or #{green("gem \"modpack_localizer\"")}
+          6. Add #{green("require \"modpack_localizer\"")}
+          7. Add #{green("modpack_localizer = ModpackLocalizer::SNBT::Performer.new")}
+          8. #{green("modpack_localizer.perform(\"file_path\")")} or
+             #{green("modpack_localizer.perform_directory(dir_path: \"dir_path\")")}
           9. Check "output" directory
       STEPS
     end
@@ -89,9 +89,9 @@ module JpQuest
     def self.help_information
       <<~INFORMATION
         #{cyan("Information:").bold}
-          jp_quest:
-            #{link("https://github.com/milkeclair/jp_quest")}
-            current version: #{JpQuest::VERSION}
+          modpack_localizer:
+            #{link("https://github.com/milkeclair/modpack_localizer")}
+            current version: #{ModpackLocalizer::VERSION}
           translator:
             #{link("https://github.com/milkeclair/jp_translator_from_gpt")}
             current version: #{JpTranslatorFromGpt::VERSION}

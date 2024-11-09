@@ -1,17 +1,17 @@
 # frozen_string_literal: true
 
 require "ruby-progressbar"
-require_relative "jp_quest/util/version"
-require_relative "jp_quest/util/help"
-require_relative "jp_quest/snbt/performer"
-require_relative "jp_quest/jar/performer"
+require_relative "modpack_localizer/util/version"
+require_relative "modpack_localizer/util/help"
+require_relative "modpack_localizer/snbt/performer"
+require_relative "modpack_localizer/jar/performer"
 
 # SNBT形式のファイルを翻訳する
 # 翻訳できるプロパティ
 # - title
 # - subtitle
 # - description
-module JpQuest
+module ModpackLocalizer
   # quests, mods配下のファイルを全て翻訳する
   # locale_codeを指定する場合、countryの指定は不要
   #
@@ -21,8 +21,8 @@ module JpQuest
   # @param [Boolean] threadable quests, modsの翻訳を並列で行うか
   # @return [void]
   def self.omakase(language: "Japanese", country: "Japan", locale_code: nil, threadable: false)
-    performers = [] << JpQuest::SNBT::Performer.new(language: language)
-    performers << JpQuest::JAR::Performer.new(
+    performers = [] << ModpackLocalizer::SNBT::Performer.new(language: language)
+    performers << ModpackLocalizer::JAR::Performer.new(
       language: language, country: country, locale_code: locale_code, display_help: false
     )
 
@@ -34,11 +34,11 @@ module JpQuest
     end
   end
 
-  # JpQuest gemについてのヘルプを表示する
+  # ModpackLocalizer gemについてのヘルプを表示する
   #
   # @return [void]
   def self.help
-    JpQuest::Help.help
+    ModpackLocalizer::Help.help
   end
 
   # プログレスバーを生成する
