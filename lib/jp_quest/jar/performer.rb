@@ -141,6 +141,28 @@ module JpQuest
       def already_has_translated_file_message(lang_data)
         "#{lang_data.mod_name.camelize} already has #{@reader.extract_file_name(lang_data.file_name)} file."
       end
+
+      def try_translation(lang_data, key, value)
+        retry_count = 0
+        before_text = value
+
+        while (retry_count < 5) && !valid_json?(lang_data.json[key])
+          lang_data.json[key] = @translator.translate(before_text)
+          retry_count += 1
+        end
+
+        return if valid_json?(lang_data.json[key])
+
+        puts "Failed to translate [#{key}: #{before_text}]"
+        lang_data.json[key] = before_text
+      end
+
+      def valid_json?(json)
+        JSON.parse(json)
+        true
+      rescue JSON::ParserError
+        false
+      end
     end
   end
 end
