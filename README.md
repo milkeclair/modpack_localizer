@@ -20,6 +20,29 @@ or if no specific configs required
 5. Add `some.snbt` or `quests` directory contents to `quests` directory
 6. Check `output` directory
 
+## ModpackLocalizer.omakase Options
+
+#### language
+
+Which language do you want to translate to?
+**(default: Japanese)**
+
+#### country
+
+Your country name
+**(default: Japan)**
+
+#### locale_code
+
+Which locale code do you want to use?  
+If you specified this, you don't need to specify the country.
+**(default: nil)**
+
+#### threadable
+
+Do you want to exec in parallel?
+**(default: false)**
+
 ## Initialize Options
 
 #### output_logs
@@ -41,3 +64,16 @@ Which language do you want to translate to?
 
 Want to display help?
 **(default: true)**
+
+## Only for jar performer
+
+#### country
+
+Your country name
+**(default: Japan)**
+
+#### locale_code
+
+Which locale code do you want to use?  
+If you specified this, you don't need to specify the country.
+**(default: nil)**

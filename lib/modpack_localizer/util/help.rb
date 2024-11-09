@@ -33,11 +33,12 @@ module ModpackLocalizer
     def self.help_intro
       <<~INTRO
         #{cyan("Introduction:").bold}
-          Translator for #{green(".snbt")} files.
+          Translator for #{green(".snbt")} and #{green(".jar")} files.
           If you want to translate to other languages than Japanese,
           please add the #{green("language")} option during initialization.
           Example:
             #{green("ModpackLocalizer::SNBT::Performer.new(language: \"English\")")}
+            #{green("ModpackLocalizer::JAR::Performer.new(language: \"English\")")}
             or if no specific configs required
             #{green("ModpackLocalizer.omakase(language: \"English\")")}
       INTRO
@@ -67,6 +68,20 @@ module ModpackLocalizer
     # @return [String]
     def self.help_init_options
       <<~OPTIONS
+        #{cyan("ModpackLocalizer.omakase Options:").bold}
+          language:
+            Which language do you want to translate to?
+            (default: Japanese)
+          country:
+            Your country name
+            (default: Japan)
+          locale_code:
+            Which locale code do you want to use?
+            If you specified this, you don't need to specify the country.
+            (default: nil)
+          threadable:
+            Do you want to exec in parallel?
+            (default: false)
         #{cyan("Initialize Options:").bold}
           output_logs:
             Want to output OpenAI usage logs?
@@ -80,6 +95,14 @@ module ModpackLocalizer
           display_help:
             Want to display help?
             (default: true)
+        Only for jar performer:
+          country:
+            Your country name
+            (default: Japan)
+          locale_code:
+            Which locale code do you want to use?
+            If you specified this, you don't need to specify the country.
+            (default: nil)
       OPTIONS
     end
 
