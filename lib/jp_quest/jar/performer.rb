@@ -38,6 +38,7 @@ module JpQuest
       #
       # @param [String] file_path ファイルのパス
       # @param [Boolean] loggable 翻訳ログを出力するか
+      # @param [Boolean] tierdown リソースパック作成後に不要なファイルを削除するか
       # @return [void]
       def perform(file_path, loggable: true, tierdown: true)
         @loggable, @tierdown = loggable, tierdown
