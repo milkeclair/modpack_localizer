@@ -23,7 +23,7 @@ or if no specific configs required
 7. Double click `start.bat` file
 8. Check `output` directory
 
-## ModpackLocalizer.omakase Options
+## Options for odpackLocalizer.omakase method
 
 #### language
 
@@ -46,7 +46,7 @@ If you specified this, you don't need to specify the country.
 Do you want to exec in parallel?  
 **(default: false)**
 
-## Initialize Options
+## Initialize options
 
 #### output_logs
 
@@ -68,7 +68,7 @@ Which language do you want to translate to?
 Want to display help?  
 **(default: true)**
 
-## Only for jar performer
+## Only for jar performer initialize options
 
 #### country
 
