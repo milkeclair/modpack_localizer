@@ -20,7 +20,8 @@ or if no specific configs required
 4. Optional: Add `OPENAI_MODEL=some_openai_model` to `.env` **(default: gpt-4o-mini)**
 5. Add `some.snbt` or `quests` directory contents to `quests` directory
 6. Add `some.jar` files to `mods` directory
-7. Check `output` directory
+7. Double click `start.bat` file
+8. Check `output` directory
 
 ## ModpackLocalizer.omakase Options
 
