@@ -29,7 +29,7 @@ module JpQuest
           exchange_language: language
         )
         @language, @country_name, @locale_code = language, country, locale_code
-        @reader, @writer, @progress_bar, @loggable = nil
+        @reader, @writer, @progress_bar, @loggable, @tierdown = nil
 
         JpQuest.help if display_help
       end
@@ -39,8 +39,8 @@ module JpQuest
       # @param [String] file_path ファイルのパス
       # @param [Boolean] loggable 翻訳ログを出力するか
       # @return [void]
-      def perform(file_path, loggable: true)
-        @loggable = loggable
+      def perform(file_path, loggable: true, tierdown: true)
+        @loggable, @tierdown = loggable, tierdown
         file_path = File.expand_path(file_path)
         validate_path(file_path)
 
@@ -67,7 +67,8 @@ module JpQuest
           return
         end
 
-        jar_files.each { |file_path| perform(file_path, loggable: loggable) }
+        jar_files.each { |file_path| perform(file_path, loggable: loggable, tierdown: false) }
+        @writer.remove_before_zipping_directory
       end
 
       # ファイルの存在性のバリデーション
@@ -113,11 +114,12 @@ module JpQuest
       # @return [void]
       def translate(lang_data)
         lang_data.json.each do |key, value|
-          # lang_data.json[key] = @translator.translate(value)
+          try_translation(lang_data, key, value)
           @progress_bar.increment if @loggable
         end
 
         @writer.make_resource_pack(lang_data)
+        @writer.remove_before_zipping_directory if @tierdown
         puts "Mod translation completed!"
       end
 
