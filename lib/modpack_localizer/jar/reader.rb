@@ -9,6 +9,8 @@ module ModpackLocalizer
     class Reader
       # 例: ja_jp
       LOCALE_CODE_REGEX = /\A[a-z]{2,3}_[a-z]{2,3}\z/
+      # BOM付きだとJSON.parseでエラーが出る
+      BOM_REGEX = /\A\xEF\xBB\xBF/
 
       # performerに渡すレスポンス
       #
@@ -60,7 +62,7 @@ module ModpackLocalizer
             )
           end
 
-          raw_json = JSON.parse(lang_file.get_input_stream.read)
+          raw_json = parse_json(lang_file)
 
           LangData.new(
             true, except_comment(raw_json), lang_file, @locale_code, extract_mod_name(lang_file), nil
@@ -97,6 +99,42 @@ module ModpackLocalizer
         lang_files = opened_jar.glob("**/lang/*.json")
 
         lang_files.find { |entry| target_locale_file?(entry, locale_code) }
+      end
+
+      # JSONを解析する
+      # BOMを削除し、UTF-8に変換する
+      #
+      # @param [Zip::Entry] zip_entry ファイル
+      # @return [Hash] JSONのハッシュ
+      def parse_json(zip_entry)
+        content = read_inner_zip(zip_entry)
+        content = change_to_utf8(content)
+        content = remove_bom(content)
+        JSON.parse(content)
+      end
+
+      # zip内のファイルの内容を読み込む
+      #
+      # @param [Zip::Entry] zip_entry ファイル
+      # @return [String] ファイルの内容
+      def read_inner_zip(zip_entry)
+        zip_entry.get_input_stream.read
+      end
+
+      # BOMを削除する
+      #
+      # @param [String] str 文字列
+      # @return [String] BOMを削除した文字列
+      def remove_bom(str)
+        str.gsub(BOM_REGEX, "")
+      end
+
+      # UTF-8に変換する
+      #
+      # @param [String] str 文字列
+      # @return [String] UTF-8に変換した文字列
+      def change_to_utf8(str)
+        str.force_encoding("UTF-8")
       end
 
       # JSONからコメントを除外する
