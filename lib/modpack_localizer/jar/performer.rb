@@ -1,4 +1,4 @@
-require "jp_translator_from_gpt"
+require "translation_api"
 require "active_support/core_ext/string/inflections"
 require_relative "../util/help"
 require_relative "../util/error"
@@ -8,7 +8,6 @@ require_relative "writer"
 module ModpackLocalizer
   module JAR
     # .jarの翻訳を実行するクラス
-    # JpTranslatorFromGptを使用して翻訳を行う
     class Performer
       # locale_codeを指定する場合、countryの指定は不要
       #
@@ -23,10 +22,11 @@ module ModpackLocalizer
         output_logs: true, except_words: [], language: "Japanese",
         country: "Japan", locale_code: nil, display_help: true
       )
-        @translator = JpTranslatorFromGpt::Translator.new(
+        @translator = TranslationAPI::Mediator.new(
           output_logs: output_logs,
           except_words: except_words,
-          exchange_language: language
+          language: language,
+          agent: :openai
         )
         @language, @country_name, @locale_code = language, country, locale_code
         @reader, @writer, @progress_bar, @loggable, @tierdown = nil

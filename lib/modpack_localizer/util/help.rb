@@ -116,8 +116,8 @@ module ModpackLocalizer
             #{link("https://github.com/milkeclair/modpack_localizer")}
             current version: #{ModpackLocalizer::VERSION}
           translator:
-            #{link("https://github.com/milkeclair/jp_translator_from_gpt")}
-            current version: #{JpTranslatorFromGpt::VERSION}
+            #{link("https://github.com/milkeclair/translation_api")}
+            current version: #{TranslationAPI::VERSION}
       INFORMATION
     end
 
