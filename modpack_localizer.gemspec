@@ -39,7 +39,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "rainbow", "~> 3.1.1"
   spec.add_dependency "ruby-progressbar", "~> 1.13.0"
   spec.add_dependency "rubyzip", "3.0.0.alpha"
-  spec.add_dependency "translation_api", "~> 0.1.1"
+  spec.add_dependency "translation_api", "~> 0.1.2"
 
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html

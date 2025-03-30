@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    modpack_localizer (0.1.4)
+    modpack_localizer (0.1.5)
       activesupport (= 8.0.0.beta1)
       countries (~> 7.0.0)
       iso-639 (~> 0.3.8)
@@ -36,6 +36,7 @@ GEM
     countries (7.0.0)
       unaccent (~> 0.3)
     csv (3.3.3)
+    deepl-rb (2.5.3)
     diff-lcs (1.6.1)
     dotenv (3.1.7)
     drb (2.2.1)
@@ -107,7 +108,8 @@ GEM
     ruby-progressbar (1.13.0)
     rubyzip (3.0.0.alpha)
     securerandom (0.4.1)
-    translation_api (0.1.1)
+    translation_api (0.1.2)
+      deepl-rb (~> 2.5.3)
       dotenv (~> 3.1.4)
       ruby-openai (~> 7.1.0)
     tzinfo (2.0.6)
@@ -137,8 +139,8 @@ DEPENDENCIES
   rubocop-rspec (~> 3.0.5)
   ruby-progressbar (~> 1.13.0)
   rubyzip (= 3.0.0.alpha)
-  translation_api (~> 0.1.1)
+  translation_api (~> 0.1.2)
   yard (~> 0.9.37)
 
 BUNDLED WITH
-   2.5.21
+   2.6.2
