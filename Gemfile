@@ -15,7 +15,7 @@ gem "rubocop-rspec", "~> 3.0.5"
 
 gem "yard", "~> 0.9.37"
 
-gem "translation_api", "~> 0.1.1"
+gem "translation_api", "~> 0.1.2"
 
 gem "rainbow", "~> 3.1.1"
 
