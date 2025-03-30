@@ -1,4 +1,5 @@
-require "jp_quest"
+require "modpack_localizer"
 
-# for other lang than japanese: JpQuest.omakase(lang: "english")
-JpQuest.omakase
+ModpackLocalizer.omakase(language: "English")
+# or
+ModpackLocalizer.omakase(language: "Japanese", country: "Japan", locale_code: nil, threadable: true)

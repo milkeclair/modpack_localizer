@@ -1,4 +1,4 @@
-require "jp_translator_from_gpt"
+require "translation_api"
 require_relative "../util/help"
 require_relative "../util/error"
 require_relative "reader"
@@ -7,7 +7,6 @@ require_relative "writer"
 module ModpackLocalizer
   module SNBT
     # .snbtの翻訳を実行するクラス
-    # JpTranslatorFromGptを使用して翻訳を行う
     class Performer
       # @param [Boolean] output_logs APIのログを出力するか
       # @param [Array<String>] except_words 翻訳しない単語
@@ -15,10 +14,11 @@ module ModpackLocalizer
       # @param [Boolean] display_help ヘルプを表示するか
       # @return [ModpackLocalizer::SNBT::Performer]
       def initialize(output_logs: true, except_words: [], language: "Japanese", display_help: true)
-        @translator = JpTranslatorFromGpt::Translator.new(
+        @translator = TranslationAPI::Mediator.new(
           output_logs: output_logs,
           except_words: except_words,
-          exchange_language: language
+          language: language,
+          agent: :openai
         )
         @reader, @writer, @progress_bar, @loggable = nil
 
