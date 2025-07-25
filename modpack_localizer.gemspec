@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.description = "localize minecraft modpack"
   spec.homepage = "https://github.com/milkeclair/modpack_localizer"
   spec.license = "MIT"
-  spec.required_ruby_version = ">= 3.0.0"
+  spec.required_ruby_version = ">= 3.4.1"
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "#{spec.homepage}/blob/main"
@@ -32,14 +32,14 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   # Uncomment to register a new dependency of your gem
-  spec.add_dependency "activesupport", "8.0.0.beta1"
-  spec.add_dependency "countries", "~> 7.0.0"
+  spec.add_dependency "activesupport", "8.0.2"
+  spec.add_dependency "countries", "~> 8.0.3"
   spec.add_dependency "iso-639", "~> 0.3.8"
-  spec.add_dependency "json", "~> 2.2"
+  spec.add_dependency "json", "~> 2.13.1"
   spec.add_dependency "rainbow", "~> 3.1.1"
   spec.add_dependency "ruby-progressbar", "~> 1.13.0"
-  spec.add_dependency "rubyzip", "3.0.0.alpha"
-  spec.add_dependency "translation_api", "~> 0.1.2"
+  spec.add_dependency "rubyzip", "3.0.0.rc2"
+  spec.add_dependency "translation_api", "~> 0.2.0"
 
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html
