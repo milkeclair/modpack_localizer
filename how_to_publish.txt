@@ -1,0 +1,10 @@
+some code change
+version.rb change
+changelog.md change
+
+$rake analysis
+
+$git commit
+$git push
+
+$rake push
