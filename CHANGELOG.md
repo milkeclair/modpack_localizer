@@ -71,3 +71,7 @@
 - gem更新
 - 依存関係ののバージョン固定を削除(更新が面倒なため)
 - camelizeを自作してActiveSupportの依存を削除
+
+## [0.2.1] - 2025-08/03
+
+- ActiveSupportのrequireを削除しわすれていたので削除
