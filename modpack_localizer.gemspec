@@ -32,14 +32,13 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   # Uncomment to register a new dependency of your gem
-  spec.add_dependency "activesupport", "8.0.2"
-  spec.add_dependency "countries", "~> 8.0.3"
-  spec.add_dependency "iso-639", "~> 0.3.8"
-  spec.add_dependency "json", "~> 2.13.1"
-  spec.add_dependency "rainbow", "~> 3.1.1"
-  spec.add_dependency "ruby-progressbar", "~> 1.13.0"
-  spec.add_dependency "rubyzip", "3.0.0.rc2"
-  spec.add_dependency "translation_api", "~> 0.2.0"
+  spec.add_dependency "countries"
+  spec.add_dependency "iso-639"
+  spec.add_dependency "json"
+  spec.add_dependency "rainbow"
+  spec.add_dependency "ruby-progressbar"
+  spec.add_dependency "rubyzip"
+  spec.add_dependency "translation_api"
 
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html

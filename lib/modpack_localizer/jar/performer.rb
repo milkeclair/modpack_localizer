@@ -140,7 +140,11 @@ module ModpackLocalizer
       # @param [LangData] lang_data Readerから取得したデータ
       # @return [String]
       def already_has_translated_file_message(lang_data)
-        "#{lang_data.mod_name.camelize} already has #{@reader.extract_file_name(lang_data.file_name)} file."
+        "#{camelize(lang_data.mod_name)} already has #{@reader.extract_file_name(lang_data.file_name)} file."
+      end
+
+      def camelize(str)
+        str.split("_").map(&:capitalize).join
       end
     end
   end

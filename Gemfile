@@ -5,27 +5,25 @@ source "https://rubygems.org"
 # Specify your gem's dependencies in modpack_localizer.gemspec
 gemspec
 
-gem "rake", "~> 13.3.0"
+gem "rake"
 
-gem "rspec", "~> 3.13.1"
+gem "rspec"
 
-gem "rubocop", "~> 1.78.0"
-gem "rubocop-rake", "~> 0.7.1"
-gem "rubocop-rspec", "~> 3.6.0"
+gem "rubocop"
+gem "rubocop-rake"
+gem "rubocop-rspec"
 
-gem "yard", "~> 0.9.37"
+gem "yard"
 
-gem "translation_api", "~> 0.2.0"
+gem "translation_api"
 
-gem "rainbow", "~> 3.1.1"
+gem "rainbow"
 
-gem "ruby-progressbar", "~> 1.13.0"
+gem "ruby-progressbar"
 
-gem "rubyzip", "3.0.0.rc2"
+gem "rubyzip"
 
-gem "countries", "~> 8.0.3"
-gem "iso-639", "~> 0.3.8"
+gem "countries"
+gem "iso-639"
 
-gem "json", "~> 2.13.1"
-
-gem "activesupport", "8.0.2"
+gem "json"
