@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    modpack_localizer (0.2.1)
+    modpack_localizer (0.2.2)
       countries
       iso-639
       json
