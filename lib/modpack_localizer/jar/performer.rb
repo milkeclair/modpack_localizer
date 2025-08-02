@@ -1,5 +1,4 @@
 require "translation_api"
-require "active_support/core_ext/string/inflections"
 require_relative "../util/help"
 require_relative "../util/error"
 require_relative "reader"
