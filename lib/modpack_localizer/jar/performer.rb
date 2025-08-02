@@ -114,7 +114,17 @@ module ModpackLocalizer
       # @return [void]
       def translate(lang_data)
         lang_data.json.each do |key, value|
-          lang_data.json[key] = @translator.translate(value)
+          retries = 0
+          begin
+            lang_data.json[key] = @translator.translate(value)
+          rescue IO::TimeoutError => e
+            retries += 1
+            raise e unless retries <= 3
+
+            puts "Connection failed, retrying... (#{retries}/3)"
+            sleep(2)
+            retry
+          end
           @progress_bar.increment if @loggable
         end
 
