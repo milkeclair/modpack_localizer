@@ -17,7 +17,7 @@ or if no specific configs required
 1. Download [release](https://github.com/milkeclair/modpack_localizer/releases)
 2. Make `.env` file
 3. Add `OPENAI_API_KEY=your_api_key` to `.env`
-4. Optional: Add `OPENAI_MODEL=some_openai_model` to `.env` **(default: gpt-4o-mini)**
+4. Optional: Add `OPENAI_MODEL=some_openai_model` to `.env`
 5. Add `some.snbt` or `quests` directory contents to `quests` directory
 6. Add `some.jar` files to `mods` directory
 7. Double click `start.bat` file
