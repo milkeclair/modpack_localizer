@@ -14,12 +14,13 @@ module ModpackLocalizer
       # @param [Boolean] display_help ヘルプを表示するか
       # @return [ModpackLocalizer::SNBT::Performer]
       def initialize(output_logs: true, except_words: [], language: "Japanese", display_help: true)
-        @translator = TranslationAPI::Mediator.new(
-          output_logs: output_logs,
-          except_words: except_words,
-          language: language,
-          agent: :openai
-        )
+        TranslationAPI.configure do |config|
+          config.output_logs  = output_logs
+          config.language     = language
+          config.except_words = except_words
+          config.provider     = :openai
+        end
+
         @reader, @writer, @progress_bar, @loggable = nil
 
         ModpackLocalizer.help if display_help
@@ -40,7 +41,7 @@ module ModpackLocalizer
         init_progress_bar(file_path, results.length) if @loggable
 
         results.each do |result|
-          result[:text] = @translator.translate(result[:text])
+          result[:text] = TranslationAPI.translate(result[:text])
           @writer.overwrites(result)
           @progress_bar.increment if @loggable
         end

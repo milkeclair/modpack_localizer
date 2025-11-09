@@ -21,13 +21,13 @@ module ModpackLocalizer
   # @param [Boolean] threadable quests, modsの翻訳を並列で行うか
   # @return [void]
   def self.omakase(language: "Japanese", country: "Japan", locale_code: nil, threadable: false)
-    performers = [] << ModpackLocalizer::SNBT::Performer.new(language: language)
+    performers = [] << ModpackLocalizer::SNBT::Performer.new(language:)
     performers << ModpackLocalizer::JAR::Performer.new(
-      language: language, country: country, locale_code: locale_code, display_help: false
+      language:, country:, locale_code:, display_help: false
     )
 
     if threadable
-      threads = performers.map { |pfm| Thread.new { pfm.perform_directory(loggable: false) } }
+      threads = performers.map { Thread.new { it.perform_directory(loggable: false) } }
       threads.each(&:join)
     else
       performers.each(&:perform_directory)

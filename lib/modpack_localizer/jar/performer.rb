@@ -21,12 +21,13 @@ module ModpackLocalizer
         output_logs: true, except_words: [], language: "Japanese",
         country: "Japan", locale_code: nil, display_help: true
       )
-        @translator = TranslationAPI::Mediator.new(
-          output_logs: output_logs,
-          except_words: except_words,
-          language: language,
-          agent: :openai
-        )
+        TranslationAPI.configure do |config|
+          config.output_logs  = output_logs
+          config.language     = language
+          config.except_words = except_words
+          config.provider     = :openai
+        end
+
         @language, @country_name, @locale_code = language, country, locale_code
         @reader, @writer, @progress_bar, @loggable, @tierdown = nil
 
@@ -116,7 +117,7 @@ module ModpackLocalizer
         lang_data.json.each do |key, value|
           retries = 0
           begin
-            lang_data.json[key] = @translator.translate(value)
+            lang_data.json[key] = TranslationAPI.translate(value)
           rescue IO::TimeoutError => e
             retries += 1
             raise e unless retries <= 3
