@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    modpack_localizer (0.3.0)
+    modpack_localizer (0.4.0)
       countries
       iso-639
       json
@@ -36,8 +36,8 @@ GEM
     lint_roller (1.1.0)
     logger (1.7.0)
     multipart-post (2.4.1)
-    net-http (0.7.0)
-      uri
+    net-http (0.8.0)
+      uri (>= 0.11.1)
     parallel (1.27.0)
     parser (3.3.10.0)
       ast (~> 2.4.1)
@@ -77,9 +77,9 @@ GEM
     rubocop-rake (0.7.1)
       lint_roller (~> 1.1)
       rubocop (>= 1.72.1)
-    rubocop-rspec (3.7.0)
+    rubocop-rspec (3.8.0)
       lint_roller (~> 1.1)
-      rubocop (~> 1.72, >= 1.72.1)
+      rubocop (~> 1.81)
     ruby-openai (8.3.0)
       event_stream_parser (>= 0.3.0, < 2.0.0)
       faraday (>= 1)
