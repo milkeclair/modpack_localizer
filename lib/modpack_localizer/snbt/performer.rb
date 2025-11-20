@@ -8,6 +8,10 @@ module ModpackLocalizer
   module SNBT
     # .snbtの翻訳を実行するクラス
     class Performer
+      MAX_RETRIES = 8
+      BASE_DELAY = 5
+      MAX_SLEEP = 256
+
       # @param [Boolean] output_logs APIのログを出力するか
       # @param [Array<String>] except_words 翻訳しない単語
       # @param [String] language 言語
@@ -41,7 +45,7 @@ module ModpackLocalizer
         init_progress_bar(file_path, results.length) if @loggable
 
         results.each do |result|
-          result[:text] = TranslationAPI.translate(result[:text])
+          result[:snbt] = retryable_translate(result[:text])
           @writer.overwrites(result)
           @progress_bar.increment if @loggable
         end
@@ -79,6 +83,25 @@ module ModpackLocalizer
       end
 
       private
+
+      def retryable_translate(text)
+        retries = 0
+        begin
+          TranslationAPI.translate(text)
+        rescue StandardError => e
+          retries += 1
+          raise e unless retries <= MAX_RETRIES
+
+          sleep_time = sleep_time(retries)
+          puts "Translation failed, retrying... (#{retries}/#{MAX_RETRIES}) waiting #{sleep_time.round(2)} seconds"
+          sleep(sleep_time)
+          retry
+        end
+      end
+
+      def sleep_time(retries)
+        [BASE_DELAY * (retries**2), MAX_SLEEP].min
+      end
 
       # プログレスバーを初期化する
       #

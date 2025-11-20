@@ -8,6 +8,10 @@ module ModpackLocalizer
   module JAR
     # .jarの翻訳を実行するクラス
     class Performer
+      MAX_RETRIES = 8
+      BASE_DELAY = 5
+      MAX_SLEEP = 256
+
       # locale_codeを指定する場合、countryの指定は不要
       #
       # @param [Boolean] output_logs APIのログを出力するか
@@ -118,12 +122,13 @@ module ModpackLocalizer
           retries = 0
           begin
             lang_data.json[key] = TranslationAPI.translate(value)
-          rescue IO::TimeoutError => e
+          rescue StandardError => e
             retries += 1
-            raise e unless retries <= 3
+            raise e unless retries <= MAX_RETRIES
 
-            puts "Connection failed, retrying... (#{retries}/3)"
-            sleep(2)
+            sleep_time = sleep_time(retries)
+            puts "Translation failed, retrying... (#{retries}/#{MAX_RETRIES}) waiting #{sleep_time.round(2)} seconds"
+            sleep(sleep_time)
             retry
           end
           @progress_bar.increment if @loggable
@@ -151,6 +156,10 @@ module ModpackLocalizer
       # @return [String]
       def already_has_translated_file_message(lang_data)
         "#{camelize(lang_data.mod_name)} already has #{@reader.extract_file_name(lang_data.file_name)} file."
+      end
+
+      def sleep_time(retries)
+        [BASE_DELAY * (retries**2), MAX_SLEEP].min
       end
 
       def camelize(str)
