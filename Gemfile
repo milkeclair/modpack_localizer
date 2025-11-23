@@ -13,6 +13,7 @@ gem "rubocop-rspec", require: false
 gem "yard", require: false
 
 gem "countries"
+gem "dotenv"
 gem "iso-639"
 gem "json"
 gem "rainbow"

@@ -1,3 +1,4 @@
+require "dotenv"
 require "translation_api"
 require_relative "../util/help"
 require_relative "../util/error"
@@ -8,6 +9,8 @@ module ModpackLocalizer
   module JAR
     # .jarの翻訳を実行するクラス
     class Performer
+      Dotenv.load
+
       MAX_RETRIES = 8
       BASE_DELAY = 5
       MAX_SLEEP = 256
@@ -26,10 +29,11 @@ module ModpackLocalizer
         country: "Japan", locale_code: nil, display_help: true
       )
         TranslationAPI.configure do |config|
-          config.output_logs  = output_logs
-          config.language     = language
-          config.except_words = except_words
-          config.provider     = :openai
+          config.output_logs   = output_logs
+          config.language      = language
+          config.except_words  = except_words
+          config.provider      = ENV["PROVIDER"] || :openai
+          config.custom_prompt = "Never translate property access. Example: obj.property.child"
         end
 
         @language, @country_name, @locale_code = language, country, locale_code

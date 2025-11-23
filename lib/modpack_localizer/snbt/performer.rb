@@ -19,10 +19,11 @@ module ModpackLocalizer
       # @return [ModpackLocalizer::SNBT::Performer]
       def initialize(output_logs: true, except_words: [], language: "Japanese", display_help: true)
         TranslationAPI.configure do |config|
-          config.output_logs  = output_logs
-          config.language     = language
-          config.except_words = except_words
-          config.provider     = :openai
+          config.output_logs   = output_logs
+          config.language      = language
+          config.except_words  = except_words
+          config.provider      = ENV["PROVIDER"] || :openai
+          config.custom_prompt = "Never translate property access. Example: obj.property.child"
         end
 
         @reader, @writer, @progress_bar, @loggable = nil

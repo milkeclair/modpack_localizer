@@ -33,6 +33,7 @@ Gem::Specification.new do |spec|
 
   # Uncomment to register a new dependency of your gem
   spec.add_dependency "countries"
+  spec.add_dependency "dotenv"
   spec.add_dependency "iso-639"
   spec.add_dependency "json"
   spec.add_dependency "rainbow"
