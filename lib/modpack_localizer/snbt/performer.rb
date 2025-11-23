@@ -20,9 +20,9 @@ module ModpackLocalizer
       def initialize(output_logs: true, except_words: [], language: "Japanese", display_help: true)
         TranslationAPI.configure do |config|
           config.output_logs   = output_logs
-          config.language      = language
+          config.language      = language.downcase
           config.except_words  = except_words
-          config.provider      = ENV["PROVIDER"] || :openai
+          config.provider      = ENV["PROVIDER"]&.to_sym || :openai
           config.custom_prompt = "Never translate property access. Example: obj.property.child"
         end
 

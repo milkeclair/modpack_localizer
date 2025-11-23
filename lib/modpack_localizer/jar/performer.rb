@@ -30,9 +30,9 @@ module ModpackLocalizer
       )
         TranslationAPI.configure do |config|
           config.output_logs   = output_logs
-          config.language      = language
+          config.language      = language.downcase
           config.except_words  = except_words
-          config.provider      = ENV["PROVIDER"] || :openai
+          config.provider      = ENV["PROVIDER"]&.to_sym || :openai
           config.custom_prompt = "Never translate property access. Example: obj.property.child"
         end
 
