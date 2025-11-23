@@ -1,3 +1,4 @@
+require "dotenv"
 require "translation_api"
 require_relative "../util/help"
 require_relative "../util/error"
@@ -8,6 +9,8 @@ module ModpackLocalizer
   module SNBT
     # .snbtの翻訳を実行するクラス
     class Performer
+      Dotenv.load
+
       MAX_RETRIES = 8
       BASE_DELAY = 5
       MAX_SLEEP = 256
