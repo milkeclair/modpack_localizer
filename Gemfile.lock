@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    modpack_localizer (0.5.0)
+    modpack_localizer (0.5.1)
       countries
       dotenv
       iso-639
