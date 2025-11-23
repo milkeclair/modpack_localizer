@@ -2,9 +2,9 @@ some code change
 version.rb change
 changelog.md change
 
-$rake analysis
+$rake gem:check
 
 $git commit
 $git push
 
-$rake push
+$rake gem:push
