@@ -1,5 +1,10 @@
 require "modpack_localizer"
 
-ModpackLocalizer.omakase(language: "English")
+# ModpackLocalizer.omakase(language: "English")
 # or
-ModpackLocalizer.omakase(language: "Japanese", country: "Japan", locale_code: nil, threadable: true)
+begin
+  ModpackLocalizer.omakase
+rescue StandardError => e
+  puts e
+  puts e.backtrace
+end

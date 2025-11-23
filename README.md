@@ -16,12 +16,11 @@ or if no specific configs required
 
 1. Download [release](https://github.com/milkeclair/modpack_localizer/releases)
 2. Make `.env` file
-3. Add `OPENAI_API_KEY=your_api_key` to `.env`
-4. Optional: Add `OPENAI_MODEL=some_openai_model` to `.env`
-5. Add `some.snbt` or `quests` directory contents to `quests` directory
-6. Add `some.jar` files to `mods` directory
-7. Double click `start.bat` file
-8. Check `output` directory
+3. Add your API keys to `.env` file [see](https://github.com/milkeclair/translation_api)
+4. Add `some.snbt` or `quests` directory contents to `quests` directory
+5. Add `some.jar` files to `mods` directory
+6. Double click `start.bat` file
+7. Check `output` directory
 
 ## Options for omakase method
 

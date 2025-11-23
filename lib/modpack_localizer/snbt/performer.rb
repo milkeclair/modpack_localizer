@@ -1,3 +1,4 @@
+require "dotenv"
 require "translation_api"
 require_relative "../util/help"
 require_relative "../util/error"
@@ -8,6 +9,8 @@ module ModpackLocalizer
   module SNBT
     # .snbtの翻訳を実行するクラス
     class Performer
+      Dotenv.load
+
       MAX_RETRIES = 8
       BASE_DELAY = 5
       MAX_SLEEP = 256
@@ -19,10 +22,11 @@ module ModpackLocalizer
       # @return [ModpackLocalizer::SNBT::Performer]
       def initialize(output_logs: true, except_words: [], language: "Japanese", display_help: true)
         TranslationAPI.configure do |config|
-          config.output_logs  = output_logs
-          config.language     = language
-          config.except_words = except_words
-          config.provider     = :openai
+          config.output_logs   = output_logs
+          config.language      = language.downcase
+          config.except_words  = except_words
+          config.provider      = ENV["PROVIDER"]&.to_sym || :openai
+          config.custom_prompt = "Never translate property access. Example: obj.property.child"
         end
 
         @reader, @writer, @progress_bar, @loggable = nil
