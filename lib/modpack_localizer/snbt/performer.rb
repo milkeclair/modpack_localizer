@@ -49,7 +49,7 @@ module ModpackLocalizer
         init_progress_bar(file_path, results.length) if @loggable
 
         results.each do |result|
-          result[:snbt] = retryable_translate(result[:text])
+          result[:text] = retryable_translate(result[:text])
           @writer.overwrites(result)
           @progress_bar.increment if @loggable
         end
