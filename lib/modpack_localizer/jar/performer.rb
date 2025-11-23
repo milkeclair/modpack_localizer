@@ -28,13 +28,7 @@ module ModpackLocalizer
         output_logs: true, except_words: [], language: "Japanese",
         country: "Japan", locale_code: nil, display_help: true
       )
-        TranslationAPI.configure do |config|
-          config.output_logs   = output_logs
-          config.language      = language.downcase
-          config.except_words  = except_words
-          config.provider      = ENV["PROVIDER"]&.to_sym || :openai
-          config.custom_prompt = "Never translate property access. Example: obj.property.child"
-        end
+        configure_translation_api(output_logs:, except_words:, language:)
 
         @language, @country_name, @locale_code = language, country, locale_code
         @reader, @writer, @progress_bar, @loggable, @tierdown = nil
@@ -90,6 +84,18 @@ module ModpackLocalizer
       end
 
       private
+
+      def configure_translation_api(
+        output_logs: true, except_words: [], language: "Japanese"
+      )
+        TranslationAPI.configure do |config|
+          config.output_logs   = output_logs
+          config.language      = language.downcase
+          config.except_words  = except_words
+          config.provider      = ENV["PROVIDER"]&.to_sym || :openai
+          config.custom_prompt = "Never translate property access. Example: obj.property.child"
+        end
+      end
 
       # ReaderとWriterを初期化する
       #
